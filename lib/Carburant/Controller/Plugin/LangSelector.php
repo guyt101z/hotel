@@ -18,10 +18,10 @@ class Carburant_Controller_Plugin_LangSelector extends Zend_Controller_Plugin_Ab
                     $_COOKIE['locale'] = 'fr_ER';
 		}
 
-		if ($locale == 'en_US') {
-			$lang = 'en';
-		} else { // fr_FR
+		if ($locale == 'fr_FR') {
 			$lang = 'fr';
+		} else { // en_US
+			$lang = 'en';
 		}
 		
 		$translate = new Zend_Translate('Array', APP_PATH . '/languages/'. $lang . '.php' , $lang);

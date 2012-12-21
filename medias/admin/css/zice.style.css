@@ -1344,7 +1344,7 @@ label.iPhoneCheckLabelOff span {
 	-webkit-border-radius: 15px;
 
 }
-#login #username, #login #password {
+#login #username, #login #password, #login #email, #login #pwd {
 	font-size: 25px;
 	background-repeat:no-repeat;
 /*	padding-left: 35px;*/
@@ -1359,13 +1359,13 @@ text-align:center;
 	margin-bottom: 10px;
 	font-family:"Myriad Pro", Arial, Helvetica, sans-serif;
 }
-#login #username:focus, #login #password:focus {
+#login #username:focus, #login #password:focus, #login #email:focus, #login #pwd:focus {
 	color:#000;
 }
-#login #username {
+#login #username, #login #email {
 	background-image: url(../images/icon/user_.png);
 }
-#login #password {
+#login #password, #login #pwd {
 	background-image: url(../images/icon/pass_.png);
 }
 #login .loginButton{

@@ -10,8 +10,7 @@ class Admin_DashboardController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $jobs_table = new Admin_Model_DbTable_Jobs();
-        $this->view->jobs_table = $jobs_table->getJobs();
+        
     }
 
     public function setcookieAction() 

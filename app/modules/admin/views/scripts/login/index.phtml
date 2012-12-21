@@ -48,33 +48,33 @@
 <div class="text_success"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/loadder/loader_green.gif"  alt="Carburant" /><span>Please wait</span></div>
 
 <div id="login" >
-	<!-- <div class="ribbon"></div> -->
-	<div class="inner">
-		<div class="logo"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/logo/logo_login.png" alt="Carburant Admin" /></div>
-		<div class="formLogin">
-			<form enctype="multipart/form-data" name="formLogin" id="formLogin" action="<?php echo $this->loginForm->getAction(); ?>" method="<?php echo $this->loginForm->getMethod(); ?>">
+    <!-- <div class="ribbon"></div> -->
+    <div class="inner">
+        <div class="logo"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/logo/logo_login.png" alt="Carburant Admin" /></div>
+        <div class="formLogin">
+            <form enctype="multipart/form-data" name="formLogin" id="formLogin" action="<?php echo $this->loginForm->getAction(); ?>" method="<?php echo $this->loginForm->getMethod(); ?>">
 
-				<div class="tip"><?php echo $this->loginForm->username; ?></div>
-				<div class="tip"><?php echo $this->loginForm->password; ?></div>
+                <div class="tip"><?php echo $this->loginForm->email; ?></div>
+                <div class="tip"><?php echo $this->loginForm->pwd; ?></div>
 
-				<div class="loginButton">
-					<div style="float:right; padding:3px 0; margin-right:-12px;">
-						<div> 
-							<ul class="uibutton-group">
-								<li><input type="submit" id="but_login" class="uibutton normal" value="Login"></li>
-								<!-- <li><a class="uibutton normal" href="#" id="forgetpass">forgetpass</a></li> -->
-							</ul>
-						</div>
-			  
- 					</div>
-					<div class="clear"><?php echo $this->loginForm->hash; ?></div>
-		 	 	</div>
+                <div class="loginButton">
+                    <div style="float:right; padding:3px 0; margin-right:-12px;">
+                        <div> 
+                            <ul class="uibutton-group">
+                                <li><input type="submit" id="but_login" class="uibutton normal" value="Login"></li>
+                                <!-- <li><a class="uibutton normal" href="#" id="forgetpass">forgetpass</a></li> -->
+                            </ul>
+                        </div>
 
-			</form>
-		</div>
-	</div>
-	<div class="clear"></div>
-	<div class="shadow"></div>
+                    </div>
+                    <div class="clear"><?php echo $this->loginForm->hash; ?></div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="shadow"></div>
 </div>
 
 <div class="clear"></div>

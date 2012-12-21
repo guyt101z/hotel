@@ -19,9 +19,9 @@ $(document).ready(function () {
 	    });
 	    
 	$('#but_login').click(function(e){				
-		  if(document.formLogin.username.value == "" || document.formLogin.password.value == "")
+		  if(document.formLogin.email.value == "" || document.formLogin.pwd.value == "")
 		  {
-			  showError("Please Input Username / Password");
+			  showError("Please Input Email / Password");
 			  $('.inner').jrumble({ x: 4,y: 0,rotation: 0 });	
 			  $('.inner').trigger('startRumble');
 			  setTimeout('$(".inner").trigger("stopRumble")',500);
