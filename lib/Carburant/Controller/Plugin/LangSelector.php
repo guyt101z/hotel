@@ -19,7 +19,7 @@ class Carburant_Controller_Plugin_LangSelector extends Zend_Controller_Plugin_Ab
 		}
 
 		if ($locale == 'fr_FR') {
-			$lang = 'fr';
+			$lang = 'en';
 		} else { // en_US
 			$lang = 'en';
 		}

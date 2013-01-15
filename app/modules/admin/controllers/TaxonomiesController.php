@@ -1,27 +1,24 @@
 <?php
 
-class Admin_WorldController extends Zend_Controller_Action 
+class Admin_TaxonomiesController extends Zend_Controller_Action 
 {
 
     public function init() {
-        $this->table = new Admin_Model_DbTable_World();    
-        $this->view->types = array('1'=>'region', '2'=>'country', '3'=>'city');
-        Zend_Layout::getMvcInstance()->assign('selectedWorld', true);
+        $this->table = new Admin_Model_DbTable_Taxonomies();    
+        Zend_Layout::getMvcInstance()->assign('selectedTaxonomies', true);
     }
 
     /**
      * list regions
      */
     public function indexAction() {
-        $this->view->focusRowArray = $this->table->getRegions();
+        $this->view->focusRowArray = $this->table->getTaxonomies();
     }
     
     public function viewAction() {
         $id = $this->_request->getParam('id');
         
-        $this->view->id = $id;
-        
-        $this->view->focusRowArray = $this->table->getWorldRightJoinTranslateWorld($id);
+        $this->view->focusRowArray = $this->table->getTaxonomyByTid($id);
     }
     
     public function editAction() {

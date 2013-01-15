@@ -24,23 +24,6 @@
     <div class="page">
         
         <!-- start header -->
-        <div id="header">
-            <div id="logo">
-                <div class="inner"><a href="/"><img src='/medias/images/logo.png'></a></div>
-            </div>
-            <div id="header_right">
-                <div id="logo_afaq"><div class="inner"><img src="/medias/images/logo_afaq.png"></div></div>
-                <div id="menu">
-                    <?php if (isset($_COOKIE['locale']) && $_COOKIE['locale'] == 'en_US') { ?>
-                        <div><?php echo $this->navigation()->menu()->renderMenu(Zend_Registry::get('navigation_en')); ?></div>
-                        <div id="breadcrumbs"><div class="inner"><a href="/">Home Page</a> > <?php echo $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render(Zend_Registry::get('navigation_en')); ?></div></div>
-                    <?php } else { ?>
-                        <?php echo $this->navigation()->menu()->renderMenu(Zend_Registry::get('navigation_fr')); ?>
-                        <div id="breadcrumbs"><div class="inner"><a href="/">Home Page</a> > <?php echo $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render(Zend_Registry::get('navigation_fr')); ?></div></div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
         <!-- end header -->
         
         <!-- start main -->
@@ -63,15 +46,6 @@
         
         <div id="footer">
             <div class="inner">
-                <a>Crédits</a>
-                |
-                <a>Plan du Site</a>
-                |
-                <a>Mentions légales</a>
-                <img src="/medias/images/LOGO_FACEBOOK.png"> <img src="/medias/images/LOGO_TWITTER.png"> 
-                    Langues 
-                    <a href="" onclick="setCookie('locale', 'en_US')"><img src="/medias/images/LOGO_ENGLISH.png"></a>
-                    <a href="" onclick="setCookie('locale', 'fr_FR')"><img src="/medias/images/LOGO_FRANCH.png"></a>
             </div>
         </div>
         <div id="fb-root"></div>

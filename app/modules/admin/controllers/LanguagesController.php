@@ -3,34 +3,33 @@
 class Admin_LanguagesController extends Zend_Controller_Action 
 {
 	
-    public function init() 
-    {
-        Zend_Layout::getMvcInstance()->assign('selectedLanguages', true);
-        $this->table = new Admin_Model_DbTable_Languages();
-    }
-
-    public function indexAction() 
-    {
-        $this->view->languages = $this->table->getLanguages();
-    }
-
-    /**
-     * Add a new job category
-     */
-    public function addAction() 
-    {
-        $form = $this->_getForm();
-
-        if ($this->_request->isPost()) {
-            $data = $this->_request->getPost();
-            if ($form->isValid($data)) {
-                $this->table->addJobCategory($data['name']);
-                $this->_helper->redirector();
-            } else {
-                $form->populate($data);
-            }
+        public function init() 
+        {
+                $this->view->selectedLanguages = true;
+                $this->table = new Admin_Model_DbTable_Languages();
         }
-    }
+
+        public function indexAction() 
+        {
+                $this->view->languages = $this->table->getLanguages();
+        }
+
+        public function addAction() 
+        {
+                $form = $this->_getForm();
+
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        $this->table->addJobCategory($data['name']);
+                        $this->_helper->redirector();
+                    } else {
+                        $form->populate($data);
+                    }
+                }
+                
+                $this->render('form');
+        }
 
 
     /**
@@ -69,20 +68,16 @@ class Admin_LanguagesController extends Zend_Controller_Action
             throw new Zend_Exception('error occured while deleting a job category. ');
     }
 
-    /**
-     * Get a job form object.
-     *
-     * @return Zend_Form
-     */
-    private function _getForm() 
-    {
-        $form = new Admin_Form_JobCategory(array(
-            'method' => 'post'
-        ));
-                            
-        /* assign view variables */
-        $this->view->form = $form;
-        return $form;
-    }
+    
+        private function _getForm() 
+        {
+                $form = new Admin_Form_JobCategory(array(
+                    'method' => 'post'
+                ));
+
+                /* assign view variables */
+                $this->view->form = $form;
+                return $form;
+        }
 }
 

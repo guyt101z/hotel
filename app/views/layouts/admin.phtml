@@ -100,14 +100,9 @@
               <div id="left_menu">
                     <ul id="main_menu" class="main_menu">
                       <li class="limenu<?php if($this->layout()->selectedDashboard): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'dashboard'), 'default', true); ?>"><span class="ico gray shadow home" ></span><b><?php echo $this->translate('Dashboard') ?></b></a></li>
-                      <li class="limenu<?php if($this->layout()->selectedLanguages): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'languages'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('Languages') ?></b></a></li>
+                      <li class="limenu<?php if($this->selectedLanguages): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'languages'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('Languages') ?></b></a></li>
                       <li class="limenu<?php if($this->layout()->selectedWorld): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'world'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('World') ?></b></a></li>
-                      <li class="limenu<?php if($this->layout()->selectedJobs): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'jobs'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('Jobs') ?></b></a>
-                        <ul>
-                          <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'jobs'), 'default', true); ?>">Jobs</a></li>
-                          <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'jobcategories'), 'default', true); ?>">Categories</a></li>
-                        </ul>
-                      </li>                      
+                      <li class="limenu<?php if($this->layout()->selectedTaxonomies): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'taxonomies'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('Taxonomies') ?></b></a></li>                      
                       <li class="limenu<?php if($this->layout()->selectedNews): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'news'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('News') ?></b></a></li>
                       <li class="limenu<?php if($this->layout()->selectedPages): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'pages'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('Pages') ?></b></a>
                     	<ul>

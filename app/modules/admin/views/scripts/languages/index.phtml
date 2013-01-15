@@ -19,18 +19,20 @@
                                         <th><?php echo $this->translate('Language ID') ?></th>
                                         <th><?php echo $this->translate('Locale') ?></th>
                                         <th><?php echo $this->translate('Title') ?></th>
-                                        <td><?php echo $this->translate('Action') ?></td>
+                                        <th><?php echo $this->translate('Action') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($this->languages as $language): ?>
                                     <tr>
-                                        <td><?php echo $language->lid ?></td>
-                                        <td><?php echo $language->locale;?></td>
-                                        <td><?php echo $language->title ?></td>
+                                        <td><?php echo $language['lid'] ?></td>
+                                        <td><?php echo $language['locale']?></td>
+                                        <td><?php echo $language['title'] ?></td>
                                         <td class="center">
+                                            <!--
                                             <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'lid' => $language->lid), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'lid' => $language->lid), 'default'); ?>" class="delete" name="<?php echo $this->escape($language->locale) . ', ' . $this->escape($language->title); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>						        			
+                                           <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'lid' => $language->lid), 'default'); ?>" class="delete" name="<?php echo $this->escape($language->locale) . ', ' . $this->escape($language->title); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>						        			
+                                            -->
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
