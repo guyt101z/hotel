@@ -27,11 +27,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         protected function _initLoadPlugins()
         {
-        // On recupérer le Controller Frontal
             $front = Zend_Controller_Front::getInstance();
-        // Enregistrement des plugins
-        $front->registerPlugin(new Carburant_Controller_Plugin_ViewSetup());
-        $front->registerPlugin(new Carburant_Controller_Plugin_LoadLayout());
+            $front->registerPlugin(new Carburant_Controller_Plugin_ViewSetup());
+            $front->registerPlugin(new Carburant_Controller_Plugin_LoadLayout());
             $front->registerPlugin(new Carburant_Controller_Plugin_LangSelector());
         }
 

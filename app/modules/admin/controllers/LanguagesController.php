@@ -21,8 +21,8 @@ class Admin_LanguagesController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        $this->table->addJobCategory($data['name']);
-                        $this->_helper->redirector();
+                        $this->table->addLanguage($data);
+                        $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
                     }
@@ -32,50 +32,46 @@ class Admin_LanguagesController extends Zend_Controller_Action
         }
 
 
-    /**
-     * Edit job type
-     */
-    public function editAction() 
-    {
-        $form = $this->_getForm();
-
-        if ($this->_request->isPost()) {
-            if ($form->isValid($this->_request->getPost())) {
-                $id = $form->getValue('job_category_id');
-                $data = array('name' => $form->getValue('name'));
-                if ($this->table->updateJobCategory($data, $id)) {
-                    $this->_helper->redirector('index');
+        public function editAction() 
+        {
+                $form = $this->_getForm();
+                $id = $this->_request->getParam('id');
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->updateLanguage($id, $data)) {
+                            $this->_helper->redirector('index');
+                        } else {
+                            throw new Zend_Exception('Error occured while adding a new language. ');
+                        }
+                    }
                 } else {
-                    throw new Zend_Exception('error occured while adding a new job category. ');
+                    
+                    $data = $this->table->getLanguageById($id);
+                    $form->populate($data);
                 }
-            }
-        } else {
-            $id = $this->_request->getParam('id');
-            $data = $this->table->getJobCategory($id);
-            $form->populate($data->toArray());
+                
+                $this->render('form');
         }
-    }
 
-    /**
-     * Delete a job category
-     */
-    public function deleteAction() 
-    {
-        $id = $this->getRequest()->getParam('id');
-        if ($this->table->deleteJobCategory('job_category_id = ' . $id)) 
-            $this->_helper->redirector();
-        else 
-            throw new Zend_Exception('error occured while deleting a job category. ');
-    }
+        public function deleteAction() 
+        {
+                $id = $this->getRequest()->getParam('id');
+                
+                if ($this->table->deleteLanguageById($id))  
+                    $this->_helper->redirector('index');
+                else 
+                    throw new Zend_Exception('error occured while deleting this language. ');
+        }
 
     
         private function _getForm() 
         {
-                $form = new Admin_Form_JobCategory(array(
+                $form = new Admin_Form_Language(array(
                     'method' => 'post'
                 ));
 
-                /* assign view variables */
                 $this->view->form = $form;
                 return $form;
         }

@@ -1,25 +1,25 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span><?php echo $this->translate('languages') ?></span></div>
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Languages</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li ><a href="#tab2"><?php echo $this->translate('languages') ?></a></li>            
+                <li class="active"><a href="#tab2"><?php echo $this->translate('languages') ?></a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
                         <ul class="uibutton-group">
-                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a language"><?php echo $this->translate('Add')?></a></li>
+                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a language">Add</a></li>
                         </ul>
                         <div class="tableName toolbar">
                             <h3><?php echo $this->translate('list') ?></h3>
                             <table class="display data_table2" id="languages" width="100%">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $this->translate('Language ID') ?></th>
-                                        <th><?php echo $this->translate('Locale') ?></th>
-                                        <th><?php echo $this->translate('Title') ?></th>
-                                        <th><?php echo $this->translate('Action') ?></th>
+                                        <th>Language ID</th>
+                                        <th>Locale</th>
+                                        <th>Title</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,10 +29,8 @@
                                         <td><?php echo $language['locale']?></td>
                                         <td><?php echo $language['title'] ?></td>
                                         <td class="center">
-                                            <!--
-                                            <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'lid' => $language->lid), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                           <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'lid' => $language->lid), 'default'); ?>" class="delete" name="<?php echo $this->escape($language->locale) . ', ' . $this->escape($language->title); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>						        			
-                                            -->
+                                            <span class="tip"><a href="/admin/languages/edit/id/<?php echo $language['lid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/languages/delete/id/<?php echo $language['lid'] ?>" class="delete" name="<?php echo $this->escape($language['locale']) . ', ' . $this->escape($language['title']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

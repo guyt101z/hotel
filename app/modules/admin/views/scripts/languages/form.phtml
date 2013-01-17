@@ -1,24 +1,32 @@
 <div class="widget">
-        <div class="header">
-                <span><span class="ico gray window"></span>Languages</span>
-        </div>	
+        <div class="header"><span ><span class="ico gray window"></span>Languages</span></div>
         
         <div class="content">
-                <form enctype="multipart/form-data" name="formPosts" id="formPosts" action="" method="post">
-                        <div class="section">
-                                <label>Locale <small>required.</small></label>   
-                                <div><?php echo $this->postsForm->tag_id; ?></div>
-                        </div>
+                
+                <div id="UITab">
+                    
+                        <ul class="tabs">
+                            <li><a href="/admin/languages">Languages</a></li>   
+                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
+                        </ul>
+                        
+                        <form enctype="multipart/form-data" name="formLanguages" id="formLanguages" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                                
+                                <div class="section">
+                                        <label>Locale <small>required.</small></label>   
+                                        <div><?php echo $this->form->locale; ?></div>
+                                </div>
 
-         <div class="section last">
-                                            <div>
-                                                    <a class="uibutton submit_form" >Valider</a>
-                                            </div>
-                                    </div>
+                                <div class="section">
+                                        <label>Title <small>required.</small></label>   
+                                        <div><?php echo $this->form->title; ?></div>
+                                </div>
 
-            </form>
+                                <div class="section last">
+                                        <div><a class="uibutton submit_form" >Valider</a></div>
+                                </div>
 
+                        </form>
+                </div>
         </div>
 </div>
-                   
-

@@ -52,7 +52,7 @@ class Admin_LoginController extends Zend_Controller_Action
         if ($this->_processAuth($request->getPost()) && $form->isValid($request->getPost())) {
             $this->_helper->redirector('index', 'dashboard');
         } else {
-            $this->_helper->getHelper('FlashMessenger')->addMessage('Identification erronée. Veuillez réitérer votre identification.');
+            $this->_helper->getHelper('FlashMessenger')->addMessage('Identification error. Veuillez réitérer votre identification.');
             $this->_helper->redirector('index');
         }
     }
@@ -112,10 +112,10 @@ class Admin_LoginController extends Zend_Controller_Action
                 $userTable->getIdentityColumn(),
             ));
 
-            $userTable->update(array(
-                'last_login_ts' => new Zend_Db_Expr('NOW()'),
+            //$userTable->update(array(
+                //'last_login_ts' => new Zend_Db_Expr('NOW()'),
                 //'ip' =>  $this->getRequest()->getClientIp()
-            ), array('uid = ?' => $user->uid));
+            //), array('uid = ?' => $user->uid));
 
             $auth->getStorage()->write($user);
             return true;

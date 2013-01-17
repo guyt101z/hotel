@@ -3,14 +3,29 @@
 class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
 {
     
-    protected $_name = 'world';
-    protected $_primary = 'wid';
+        protected $_name = 'world';
+        protected $_primary = 'wid';
 
-    public function getTableName()
-    {
-        return $this->_name;
-    }
+        public function getTableName()
+        {
+            return $this->_name;
+        }
 
+        public function getWorld()
+        {
+                $sql = 'SELECT w1.*, trw1.title, trw2.title as parent_title FROM world as w1 ';
+                $sql .= ' LEFT JOIN translate_world as trw1 ON w1.wid = trw1.wid ';
+                $sql .= ' LEFT JOIN translate_world as trw2 ON w1.parent_id = trw2.wid';
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+        public function getParents()
+        {
+                $sql = 'SELECT * FROM world LEFT JOIN translate_world on world.wid = translate_world.wid';
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+        
     /**
      * retrieve world types. i.e. region, country, state, city.
      * @return type

@@ -1,32 +1,42 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span><?php echo $this->translate('world') ?></span></div>
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>World</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li ><a href="#tab2"><?php echo $this->translate('world') ?></a></li>            
+                <li class="active"><a href="/admin/world">World</a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
-                        <!--
                         <ul class="uibutton-group">
-                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title=""><?php echo $this->translate('') ?></a></li>
+                            <li><a href="/admin/world/add" class="uibutton icon add" title="Add">Add</a></li>
                         </ul>
-                        -->
                         <div class="tableName toolbar">
                             <h3><?php echo $this->translate('list') ?></h3>
                             <table class="display data_table2" id="world" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>World ID</th>
+                                        <th>Parent ID</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <!--
                                         <th><?php echo $this->translate('World ID') ?></th>
                                         <th><?php echo $this->translate('Locale') ?></th>
                                         <th><?php echo $this->translate('Title') ?></th>
                                         <th><?php echo $this->translate('Action') ?></th>
+                                        -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($this->focusRowArray as $row): ?>
-                                    <tr>
+                                        <?php foreach($this->focusRowArray as $row): ?>
+                                        <tr>
+                                                <td><?php echo $row['wid'] ?></td>
+                                                <td><?php echo $row['parent_id'] ?></td>
+                                                <td><?php echo $row['wid'] ?></td>
+                                                <td><?php echo $row['parent_id'] ?></td>
+                                                                            <!--
+
                                         <td><?php echo $row['wid'] ?></td>
                                         <td><?php echo $row['locale'] ?></td>
                                         <td><a href="<?php echo $this->url(array('action'=>'view', 'id'=>$row['wid'])) ?>"><?php echo ucwords($row['title']);?></a></td>
@@ -34,6 +44,8 @@
                                             <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'wid' => $row['tr_wid']), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
                                             <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'wid' => $row['tr_wid']), 'default'); ?>" class="delete" name="<?php echo $this->escape($row['title']) ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		
                                         </td>
+                                                                                                                -->
+
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

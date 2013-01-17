@@ -25,7 +25,7 @@ $(document).ready(function(){
 	  
 	// Tabs
 	$("ul.tabs li").fadeIn(400); 
-	$("ul.tabs li:first").addClass("active").fadeIn(400); 
+	//$("ul.tabs li:first").addClass("active").fadeIn(400); 
 	$(".tab_content:first").fadeIn(); 
 	$("ul.tabs li").live('click',function() {
 		  $("ul.tabs li").removeClass("active");						   
@@ -1194,7 +1194,7 @@ $('.searchAutocomplete').click(function() {
 		$('select').css('padding-top', '8px');
 	}
 	if(mybrowser.indexOf('Chrome')>0){$(function() {	
-				 $('div.tab_content  ul.uibutton-group').css('margin-top', '-40px');
+				 $('div.tab_content  ul.uibutton-group').css('margin-top', '-41px');
 				  $('div.section  div .select_box').css({'margin-top':'0px','margin-left':'-2px'});
 				  $('select').css('padding', '6px');
 				  $('table .custom-checkbox label').css('left', '3px');

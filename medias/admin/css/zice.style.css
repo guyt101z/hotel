@@ -200,7 +200,6 @@ label.disabled {
 ul.tabs {
 	margin: 0;
 	padding: 0;
-	float: left;
 	list-style: none;
 	height: 32px;
 	border-bottom: 1px solid #e9e9e9;
