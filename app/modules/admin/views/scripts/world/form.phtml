@@ -55,11 +55,13 @@ $(function() {
                          $.ajax({
                                 type: "post",
                                 dataType: "json",
-                                url: "/admin/world/get-locale-by-world-title/title/" + parent_id, 
+                                url: "/admin/world/ajax-get-locale-by-wid/id/" + parent_id, 
                                 success: function(res) {
+                                        alert(res);
                                 }
                         });
                 }
         });
+        
 });
 </script>

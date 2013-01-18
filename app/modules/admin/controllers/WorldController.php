@@ -62,6 +62,19 @@ class Admin_WorldController extends Zend_Controller_Action
                 $this->view->id = $id;
             }
         }
+        
+        public function ajaxGetLocaleByWid() 
+        {
+                $this->_helper->getHelper('layout')->disableLayout();
+                $this->_helper->viewRenderer->setNoRender();
+
+                $wid = $this->getRequest()->getParam('id');
+                if ($wid) {
+                        $title = $this->table->getLocaleByWid($wid);
+                        echo json_encode($title);
+                }
+                echo '0';
+        }
     
         private function _getForm() 
         {

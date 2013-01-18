@@ -36,6 +36,10 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
+        public function getLocaleByWid($wid)
+        {
+               // $sql = 'SELECT * FROM '
+        }
         
     /**
      * retrieve world types. i.e. region, country, state, city.
