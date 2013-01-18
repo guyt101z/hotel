@@ -1,0 +1,70 @@
+<div class="widget">
+        <div class="header"><span ><span class="ico gray window"></span>Users</span></div>
+        
+        <div class="content">
+                
+                <div id="UITab">
+                    
+                        <ul class="tabs">
+                            <li><a href="/admin/users">Users</a></li>   
+                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
+                        </ul>
+                        
+                        <form enctype="multipart/form-data" name="formUsers" id="formUsers" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                                
+                                <div class="section">
+                                        <label>First Name <small>required.</small></label>   
+                                        <div><?php echo $this->form->first_name; ?></div>
+                                </div>
+
+                                <div class="section">
+                                        <label>Last Name <small>optional.</small></label>   
+                                        <div><?php echo $this->form->last_name; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>Company Name <small>optional.</small></label>   
+                                        <div><?php echo $this->form->company_name; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>Email <small>required.</small></label>   
+                                        <div><?php echo $this->form->email; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>Password <small>required.</small></label>
+                                        <div><?php echo $this->form->pwd; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>Power <small>required.</small></label>   
+                                        <div><?php echo $this->form->power; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>User Type <small>optional.</small></label>   
+                                        <div><?php echo $this->form->user_type; ?></div>
+                                </div>
+         
+                                <div class="section">
+                                        <label>Status <small>required.</small></label>   
+                                        <div><?php echo $this->form->status; ?></div>
+                                </div>
+                            
+                                <div class="section last">
+                                        <div><a class="uibutton submit_form" >Valider</a></div>
+                                </div>
+
+                        </form>
+                </div>
+        </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+    if ($('#parent_id option').length === 0) {
+      //  $('#parent')
+    }
+});
+</script>

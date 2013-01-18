@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_DbTable_User extends Zend_Db_Table_Abstract 
+class Admin_Model_DbTable_Users extends Zend_Db_Table_Abstract 
 {
     protected $_name = 'user';
     protected $_primary = 'uid';
@@ -72,6 +72,8 @@ class Admin_Model_DbTable_User extends Zend_Db_Table_Abstract
     public function getUser($id) {
             return $this->fetchRow('user_id = ' . (int)$id);
     }
+    
+       
 
     /**
      * Update a user profile
@@ -88,4 +90,29 @@ class Admin_Model_DbTable_User extends Zend_Db_Table_Abstract
             }
             return false;
     }
+        
+        public function getUsers() 
+        {
+                $sql = 'SELECT * FROM user';
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+        public function addUser($data = array())
+        {
+                $sql = "INSERT INTO `user` (`first_name`, `last_name`, `company_name`, `email`, `pwd`, `power`, `user_type`, `status`) VALUES ("
+                        . "'" . $data['first_name'] . "', "
+                        . "'" . $data['last_name'] . "', "
+                        . "'" . $data['company_name'] . "', "
+                        . "'" . $data['email'] . "', "
+                        . "'" . $data['pwd'] . "', "
+                        . "'" . $data['power'] . "', " 
+                        . 
+                
+            $sql = "INSERT INTO `world` (`parent_id`, `lat`, `lgt`) VALUES ('" . $data['parent_id'] . "', '" . $data['lat'] . "', '" . $data['lgt'] . "')";
+                if ($this->_db->query($sql)) {
+                    $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES (LAST_INSERT_ID(), '" . $data['locale'] . "', '" . $data['title'] . "')";
+                    return $this->_db->query($sql2);
+                }
+                return null;            
+        }
 }

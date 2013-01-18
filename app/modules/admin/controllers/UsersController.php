@@ -1,56 +1,79 @@
 <?php
 
-require_once 'Zend/Auth.php';
-require_once 'Zend/Auth/Adapter/DbTable.php';
-
-class Admin_UsersController extends Zend_Controller_Action {
-
-	public function authAction() {
-		$request 	= $this->getRequest();
-		$registry 	= Zend_Registry::getInstance();
-		$auth		= Zend_Auth::getInstance(); 	 
-	}
+class Admin_UsersController extends Zend_Controller_Action 
+{
 	
-	public function indexAction() {
-		
-		$user_table = new Admin_Model_DbTable_Users();
-		
-		$user = $user_table->getUser(Zend_Auth::getInstance()->getIdentity()->user_id);
-		
-		// assign view variables
-		$this->view->user = $user;
-	} 
-	 
-	/**
-	 * Edit user info
-	 */
-	public function editAction() {
-		$form = new Admin_Form_User();
-		$form->setAction("/admin/users/edit")->setMethod('post');
-		$form->removeElement('password');
-		$form->removeElement('password2');
-		
-		$users = new Admin_Model_DbTable_Users();
-		
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($_POST)) {
-				$data = array(
-							'username'		=> $form->getValue('username'),
-							'display_name' 	=> $form->getValue('display_name'),
-							'status'		=> $form->getValue('status')
-						);
-				
-				$users->editUser($form->getValue('user_id'), $data);
-				$this->_helper->redirector(array('action'=>'index'));
-			}
-		} else {
-			$id = $this->getRequest()->getParam('id');
-			$formData = $users->getUser($id);
-			$form->populate($formData->toArray());
-		}
-		
-		// assign view variables
-		$this->view->form = $form;
-	}
+        public function init() 
+        {
+                $this->view->selectedUsers = true;
+                $this->table = new Admin_Model_DbTable_Users();
+        }
+
+        public function indexAction() 
+        {
+                $this->view->users = $this->table->getUsers();
+        }
+
+        public function addAction() 
+        {
+                $form = $this->_getForm();
+
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        $this->table->addUser($data);
+                        $this->_helper->redirector('index');
+                    } else {
+                        $form->populate($data);
+                    }
+                }
+                
+                $this->render('form');
+        }
+
+
+        public function editAction() 
+        {
+                $form = $this->_getForm();
+                $id = $this->_request->getParam('id');
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->updateLanguage($id, $data)) {
+                            $this->_helper->redirector('index');
+                        } else {
+                            throw new Zend_Exception('Error occured while adding a new language. ');
+                        }
+                    }
+                } else {
+                    
+                    $data = $this->table->getLanguageById($id);
+                    $form->populate($data);
+                }
+                
+                $this->render('form');
+        }
+
+        public function deleteAction() 
+        {
+                $id = $this->getRequest()->getParam('id');
+                
+                if ($this->table->deleteLanguageById($id))  
+                    $this->_helper->redirector('index');
+                else 
+                    throw new Zend_Exception('error occured while deleting this language. ');
+        }
+
+    
+        private function _getForm() 
+        {
+                $form = new Admin_Form_User(array(
+                    'method' => 'post'
+                ));
+
+                $this->view->form = $form;
+                return $form;
+        }
 }
-?>
+

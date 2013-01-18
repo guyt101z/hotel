@@ -17,28 +17,23 @@
                                 <thead>
                                     <tr>
                                         <th>World ID</th>
-                                        <th>Parent ID</th>
+                                        <th>World</th>
+                                        <th>Locale</th>
+                                        <th>Parent</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
-                                        <!--
-                                        <th><?php echo $this->translate('World ID') ?></th>
-                                        <th><?php echo $this->translate('Locale') ?></th>
-                                        <th><?php echo $this->translate('Title') ?></th>
-                                        <th><?php echo $this->translate('Action') ?></th>
-                                        -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                         <?php foreach($this->focusRowArray as $row): ?>
                                         <tr>
                                                 <td><?php echo $row['wid'] ?></td>
-                                                <td><?php echo $row['parent_id'] ?></td>
-                                                <td><?php echo $row['wid'] ?></td>
-                                                <td><?php echo $row['parent_id'] ?></td>
+                                                <td><?php echo $row['title'] ?></td>
+                                                <td><?php echo $row['locale'] ?></td>
+                                                <td><?php echo $row['parent'] ?></td>
+                                                <td><?php echo $row['lat'] ?></td>
+                                                <td><?php echo $row['lgt'] ?></td>
                                                                             <!--
-
-                                        <td><?php echo $row['wid'] ?></td>
-                                        <td><?php echo $row['locale'] ?></td>
                                         <td><a href="<?php echo $this->url(array('action'=>'view', 'id'=>$row['wid'])) ?>"><?php echo ucwords($row['title']);?></a></td>
                                         <td class="center">
                                             <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'wid' => $row['tr_wid']), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
