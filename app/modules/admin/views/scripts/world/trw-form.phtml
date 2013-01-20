@@ -7,21 +7,21 @@
                     
                         <ul class="tabs">
                             <li><a href="/admin/world">World</a></li>   
-                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
+                            <li class="active"><a href="#">Add</a></li>          
                         </ul>
                         
                         <form enctype="multipart/form-data" name="formWorld" id="formWorld" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
                                 
                                 <div class="section">
-                                        <label>Parent <small>required.</small></label>   
-                                        <div><?php echo $this->form->parent_id; ?></div>
-                                </div>
-
-                                <div class="section">
                                         <label>Title <small>required.</small></label>   
                                         <div><?php echo $this->form->title; ?></div>
                                 </div>
-
+                            
+                                <div class="section">
+                                        <label>Parent <small>required.</small></label>   
+                                        <div><?php echo $this->form->parent_id ?></div>
+                                </div>
+                            
                                 <div class="section">
                                         <label>Locale <small>required.</small></label>   
                                         <div><?php echo $this->form->locale; ?></div>
@@ -48,20 +48,5 @@
 
 <script type="text/javascript">
 $(function() {
-  
-        $('#parent_id').change(function(){
-                var parent_id = $('#parent_id option:selected').val();
-                if (parent_id) {
-                         $.ajax({
-                                type: "post",
-                                dataType: "json",
-                                url: "/admin/world/ajax-get-locale-by-wid/id/" + parent_id, 
-                                success: function(res) {
-                                        alert(res);
-                                }
-                        });
-                }
-        });
-        
 });
 </script>

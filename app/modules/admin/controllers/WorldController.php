@@ -5,15 +5,15 @@ class Admin_WorldController extends Zend_Controller_Action
 
         public function init() 
         {
-            $this->view->selectedWorld = true;
-            $this->table = new Admin_Model_DbTable_World();    
-            //$this->view->types = array('1'=>'region', '2'=>'country', '3'=>'city');
+                $this->view->selectedWorld = true;
+                $this->table = new Admin_Model_DbTable_World();    
+                $this->translate_world_table = new Admin_Model_DbTable_TranslateWorld();
         }
 
         public function indexAction() 
         {
                 $this->view->focusRowArray = $this->table->getWorld();
-                //die(print_r($this->view->focusRowArray));
+                $this->view->error_message =  $this->_helper->getHelper('FlashMessenger')->getMessages();
         }
         
         public function addAction() 
@@ -23,7 +23,7 @@ class Admin_WorldController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        $this->table->addWorld($data);
+                        $this->table->addWorldSingleLocale($data);
                         $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
@@ -31,6 +31,32 @@ class Admin_WorldController extends Zend_Controller_Action
                 }
                 
                 $this->render('form');
+        }
+        
+        public function addLocaleAction()
+        {
+                $form = $this->_getForm();
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->addTranslateWorld($data)) {
+                            $this->_redirect('/admin/world');
+                        } else {
+                            $this->_helper->getHelper('FlashMessenger')->addMessage('errors ocurred while adding a new locale. ');  
+                        }
+                        $this->_redirect('/admin/world');
+                    }
+                    
+                } else { 
+                    $wid = $this->_request->getParam('id');
+                    if ($wid) {
+                        $data = $this->table->getWorldById($wid);
+                        $form->populate($data);
+                    }
+                }
+                
+                $this->render('trw-form');
         }
         
         public function viewAction() 
@@ -84,6 +110,15 @@ class Admin_WorldController extends Zend_Controller_Action
 
             $this->view->form = $form;
             return $form;
+        }
+        
+        private function _getTranslateWorldForm()
+        {
+                $form = new Admin_Form_TranslateWorld(array(
+                    'method' => 'post'
+                ));
+                $this->view->form = $form;
+                return $form;
         }
 }
 ?>

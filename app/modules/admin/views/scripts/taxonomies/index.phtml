@@ -1,27 +1,25 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span><?php echo $this->translate('taxonomies') ?></span></div>
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Taxonomies</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li ><a href="#tab2"><?php echo $this->translate('taxonomies') ?></a></li>            
+                <li class="active"><a href="/admin/taxonomies">Taxonomies</a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
-                        <!--
                         <ul class="uibutton-group">
-                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title=""><?php echo $this->translate('') ?></a></li>
+                            <li><a href="/admin/taxonomies/add" class="uibutton icon add" title="">Add</a></li>
                         </ul>
-                        -->
                         <div class="tableName toolbar">
                             <h3><?php echo $this->translate('list') ?></h3>
                             <table class="display data_table2" id="world" width="100%">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $this->translate('Taxo ID') ?></th>
-                                        <th><?php echo $this->translate('Parent ID') ?></th>
-                                        <th><?php echo $this->translate('Position') ?></th>
-                                        <th><?php echo $this->translate('Section') ?></th>
+                                        <th>Taxo ID</th>
+                                        <th>Parent ID</th>
+                                        <th>Position</th>
+                                        <th>Section</th>
                                         <th><?php echo $this->translate('Action') ?></th>
                                     </tr>
                                 </thead>

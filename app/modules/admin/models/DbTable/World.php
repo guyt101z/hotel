@@ -13,21 +13,58 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
 
         public function getWorld()
         {
+                    $sql = '';
+                    $sql .= ' SELECT w1.*, trw1.tid, trw1.title, trw1.locale, trw2.title as parent FROM world as w1 ';
+                    $sql .= ' RIGHT JOIN translate_world as trw1 ON w1.wid = trw1.wid ';
+                    $sql .= ' LEFT JOIN translate_world as trw2 ON w1.parent_id = trw2.wid';
+                    return $this->_db->query($sql)->fetchAll();
+        }
+        
+        public function getWorldById($id) 
+        {
                 $sql = '';
                 $sql .= ' SELECT w1.*, trw1.title, trw1.locale, trw2.title as parent FROM world as w1 ';
                 $sql .= ' LEFT JOIN translate_world as trw1 ON w1.wid = trw1.wid ';
-                $sql .= ' LEFT JOIN translate_world as trw2 ON w1.parent_id = trw2.wid';
-                return $this->_db->query($sql)->fetchAll();
+                $sql .= ' LEFT JOIN translate_world as trw2 ON w1.parent_id = trw2.wid ';
+                $sql .= ' WHERE w1.wid = ' . $id;
+                return $this->_db->query($sql)->fetch();
         }
         
-        public function addWorld($data = array()) 
+        public function addWorldSingleLocale($data = array()) 
         {
-                $sql = "INSERT INTO `world` (`parent_id`, `lat`, `lgt`) VALUES ('" . $data['parent_id'] . "', '" . $data['lat'] . "', '" . $data['lgt'] . "')";
-                if ($this->_db->query($sql)) {
-                    $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES (LAST_INSERT_ID(), '" . $data['locale'] . "', '" . $data['title'] . "')";
-                    return $this->_db->query($sql2);
+                //$sql = "INSERT INTO `world` (`parent_id`, `lat`, `lgt`) VALUES ('" . $data['parent_id'] . "', '" . $data['lat'] . "', '" . $data['lgt'] . "')";
+                $wid = $this->insert(array(
+                    'parent_id'=>$data['parent_id'],
+                    'lat'=>$data['lat'],
+                    'lgt'=>$data['lgt']
+                ));
+                
+                if ($wid) {
+                    $data['wid'] = $wid;
+                    if ($this->getTranslateWorld($data)) {
+                        // remove wid from world
+                        $this->delete('wid='.$wid);
+                        // alert user that insertion failed.
+                        // implement it later
+                    } else {
+                        $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES ('" . $wid .  "', '" . $data['locale'] . "', '" . $data['title'] . "')";
+                        return $this->_db->query($sql2);
+                    }
                 }
+
                 return null;             
+        }
+        
+        public function addTranslateWorld($data = array())
+        {
+            if ($this->getTranslateWorld2($data)) {
+                        // alert user that insertion failed.
+                        // implement it later
+                        return null;
+                    } else {
+                        $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES ('" . $data['wid'] .  "', '" . $data['locale'] . "', '" . $data['title'] . "')";
+                        return $this->_db->query($sql2);
+                    }
         }
         
         public function getParents()
@@ -41,47 +78,58 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                // $sql = 'SELECT * FROM '
         }
         
-    /**
-     * retrieve world types. i.e. region, country, state, city.
-     * @return type
-     */
-    public function getRegions() 
-    {        
-        $result = $this->_db->query(
-                'SELECT * FROM world left join translate_world on world.wid = translate_world.wid where parent_id = 0'
-                )->fetchAll();
-        return $result;
-    }
-    
-    public function getWorldRightJoinTranslateWorld($id) 
-    {
-        $result =  $this->_db->query(
-                'SELECT * ' .
-                ' FROM ' . $this->_name . 
-                ' RIGHT JOIN ' . Admin_Model_DbTable_TranslateWorld::TABLE_NAME . 
-                ' ON ' . $this->_name . '.wid = ' . Admin_Model_DbTable_TranslateWorld::TABLE_NAME . '.wid ' .
-                ' WHERE ' . $this->_name . '.parent_id'  .  '=' . $id 
-                )->fetchAll();
-        return $result;
-    }
-    
-    /**
-     * Get job type rows.
-     * 
-     * @return Zend_Db_Table_Rowset_Abstract 
-     */
-    public function getJobCategories($order = null) 
-    {
-        $select = $this->select();
-        
-        if ($order) {
-            $select->order($order);
-        } else {
-            $select->order('name asc');
+        public function getTranslateWorldById($id) 
+        {
+                $sql = 'SELECT * FROM translate_world where trw_id = ' . $id;
+                return $this->_db->query($sql)->fetch();
         }
         
-        return $this->fetchAll($select);
-    }
+        public function getTranslateWorld($data = array()) 
+        {
+                $sql = "SELECT * FROM translate_world WHERE `wid` = '" . $data['wid'] . "'";
+                $sql .= " AND `locale` = '" . $data['locale'] . "' AND `title` = '" . $data['title'] . "'";
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+        public function getTranslateWorld2($data = array()) 
+        {
+                $sql = "SELECT * FROM translate_world ";
+                $sql .= " LEFT JOIN world ON translate_world.wid = world.wid ";
+                $sql .= " WHERE `parent_id` = '" . $data['parent_id'] . "'";
+                $sql .= " AND `locale` = '" . $data['locale'] . "' AND `title` = '" . $data['title'] . "'";
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+    
+        public function getWorldRightJoinTranslateWorld($id) 
+        {
+            $result =  $this->_db->query(
+                    'SELECT * ' .
+                    ' FROM ' . $this->_name . 
+                    ' RIGHT JOIN ' . Admin_Model_DbTable_TranslateWorld::TABLE_NAME . 
+                    ' ON ' . $this->_name . '.wid = ' . Admin_Model_DbTable_TranslateWorld::TABLE_NAME . '.wid ' .
+                    ' WHERE ' . $this->_name . '.parent_id'  .  '=' . $id 
+                    )->fetchAll();
+            return $result;
+        }
+    
+        /**
+         * Get job type rows.
+         * 
+         * @return Zend_Db_Table_Rowset_Abstract 
+         */
+        public function getJobCategories($order = null) 
+        {
+            $select = $this->select();
+
+            if ($order) {
+                $select->order($order);
+            } else {
+                $select->order('name asc');
+            }
+
+            return $this->fetchAll($select);
+        }
 
     /**
      * Get job type titles.

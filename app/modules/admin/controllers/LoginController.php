@@ -77,7 +77,7 @@ class Admin_LoginController extends Zend_Controller_Action
      */
     private function _authAdapter()
     {
-        $userTable = new Admin_Model_DbTable_User();
+        $userTable = new Admin_Model_DbTable_Users();
         $auth = new Zend_Auth_Adapter_DbTable(null);
 
         $auth->setTableName($userTable->getTableName())
@@ -105,7 +105,7 @@ class Admin_LoginController extends Zend_Controller_Action
         $result = $auth->authenticate($adapter);
 
         if ($result->isValid()) {
-            $userTable = new Admin_Model_DbTable_User();
+            $userTable = new Admin_Model_DbTable_Users();
 
             $user = $adapter->getResultRowObject(array(
                 $userTable->getPrimaryKey(),

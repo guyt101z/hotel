@@ -19,6 +19,8 @@ class Admin_Form_World extends Zend_Form
                 }
                 
                 $locale = new Zend_Form_Element_Select('locale');
+               // $locale = new Zend_Form_Element_Multiselect('locale');
+               // $locale->setAttrib('class', 'chzn-select')->setRequired(true);
                 $locale->setRequired(true);
                 $table_lang = new Admin_Model_DbTable_Languages();
                 $languages = $table_lang->getLanguages();
@@ -27,7 +29,7 @@ class Admin_Form_World extends Zend_Form
                                 $locale->addMultiOption($l['locale'], $l['locale']);
                         }
                 }
-
+               
                 $lat = new Zend_Form_Element_Text('lat');
         
                 $lgt = new Zend_Form_Element_Text('lgt');
