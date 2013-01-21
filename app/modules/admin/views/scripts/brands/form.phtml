@@ -1,0 +1,28 @@
+<div class="widget">
+        <div class="header"><span ><span class="ico gray window"></span>Brands</span></div>
+        <div class="content">
+                <div id="UITab">
+                        <ul class="tabs">
+                            <li><a href="/admin/brands">Brands</a></li>   
+                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
+                        </ul>
+                        <form enctype="multipart/form-data" name="formBrands" id="formBrands" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                                
+                                <div class="section">
+                                        <label>Title <small>required.</small></label>   
+                                        <div><?php echo $this->form->title; ?></div>
+                                </div>
+
+                                <div class="section">
+                                        <label>Status <small>required.</small></label>   
+                                        <div><?php echo $this->form->status; ?></div>
+                                </div>
+
+                                <div class="section last">
+                                        <div><a class="uibutton submit_form" >Valider</a></div>
+                                </div>
+
+                        </form>
+                </div>
+        </div>
+</div>

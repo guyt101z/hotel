@@ -1,0 +1,46 @@
+<div class="widget" >
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Brands</span></div>
+    <div class="content">
+        <div id="UITab">
+            <ul class="tabs" >
+                <li class="active"><a href="#tab2">Brands</a></li>            
+            </ul>
+            <div class="tab_container">
+                <div id="tab2" class="tab_content"> 
+                    <div class="load_page">
+                        <ul class="uibutton-group">
+                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a brand">Add</a></li>
+                        </ul>
+                        <div class="tableName toolbar">
+                            <h3><?php echo $this->translate('list') ?></h3>
+                            <table class="display data_table2" id="languages" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Brand ID</th>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($this->brands as $brand): ?>
+                                    <tr>
+                                        <td><?php echo $brand['bid'] ?></td>
+                                        <td><?php echo $brand['title']?></td>
+                                        <td><?php echo $brand['status'] ?></td>
+                                        <td class="center">
+                                            <span class="tip"><a href="/admin/brand/edit/id/<?php echo $brand['bid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/brand/delete/id/<?php echo $brand['bid'] ?>" class="delete" name="<?php echo $this->escape($brand['title']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>   
+    </div>
+</div>
