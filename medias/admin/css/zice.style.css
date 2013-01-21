@@ -1863,6 +1863,10 @@ overflow:hidden;
 	padding: 0px 10px 0 0;
 /*	min-width: 400px;*/
 }
+#formTaxonomy #content {
+        padding: 0px 7px 0px 7px;
+}
+
 #content .inner {
 	width: 98%;
 	padding-top: 60px;
@@ -3241,7 +3245,7 @@ border-radius:35px;
 	 
 	 	#shadowhead {position:fixed;}
 		#content {margin-left:70px;}
-		
+                #formTaxonomy #content {margin-left:0px;}
 }
 @media only screen and (max-width: 480px) {
 	  #content .inner .logo { float: none;width:100%;background-position:  right  bottom; }

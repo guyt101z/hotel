@@ -7,35 +7,34 @@
                     
                         <ul class="tabs">
                             <li><a href="/admin/world">World</a></li>   
-                            <li class="active"><a href="#">Add</a></li>          
+                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
                         </ul>
                         
-                        <form enctype="multipart/form-data" name="formWorld" id="formWorld" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                        <form enctype="multipart/form-data" name="formTaxonomy" id="formTaxonomy" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
                                 
-                                <div><?php echo $this->form->wid ?></div>
-                                <div class="section">
-                                        <label>Title <small>required.</small></label>   
-                                        <div><?php echo $this->form->title; ?></div>
-                                </div>
-                            
                                 <div class="section">
                                         <label>Parent <small>required.</small></label>   
-                                        <div><?php echo $this->form->parent_id ?></div>
+                                        <div><?php echo $this->form->parent_id; ?></div>
                                 </div>
-                            
+
+                                <div class="section">
+                                        <label>Section <small>required.</small></label>   
+                                        <div><?php echo $this->form->section; ?></div>
+                                </div>
+
                                 <div class="section">
                                         <label>Locale <small>required.</small></label>   
                                         <div><?php echo $this->form->locale; ?></div>
                                 </div>
                             
                                 <div class="section">
-                                        <label>Latitude <small>required.</small></label>   
-                                        <div><?php echo $this->form->lat; ?></div>
+                                        <label>Content <small>required.</small></label>   
+                                        <div><?php echo $this->form->content; ?></div>
                                 </div>
                             
                                 <div class="section">
-                                        <label>Longitude <small>required.</small></label>   
-                                        <div><?php echo $this->form->lgt; ?></div>
+                                        <label>Position <small>optional.</small></label>   
+                                        <div><?php echo $this->form->pos; ?></div>
                                 </div>
                             
                                 <div class="section last">
@@ -47,7 +46,3 @@
         </div>
 </div>
 
-<script type="text/javascript">
-$(function() {
-});
-</script>

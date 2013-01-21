@@ -16,23 +16,30 @@
                             <table class="display data_table2" id="world" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Translate Taxo ID</th>
                                         <th>Taxo ID</th>
                                         <th>Parent ID</th>
                                         <th>Position</th>
                                         <th>Section</th>
-                                        <th><?php echo $this->translate('Action') ?></th>
+                                        <th>Locale</th>
+                                        <th>Content</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($this->focusRowArray as $row): ?>
                                     <tr>
+                                        <td><?php echo $row['tr_tid'] ?></td>
                                         <td><?php echo $row['tid'] ?></td>
                                         <td><?php echo $row['parent_id'] ?></td>
                                         <td><?php echo $row['pos'] ?></td>
-                                        <td><a href="<?php echo $this->url(array('action'=>'view', 'id'=>$row['tid'])) ?>"><?php echo $row['section'] ?></a></td>
+                                        <td><?php echo $row['section'] ?></td>
+                                        <td><?php echo $row['locale'] ?></td>
+                                        <td><?php echo $row['content'] ?></td>
                                         <td class="center">
-                                            <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'wid' => $row['tid']), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'wid' => $row['tid']), 'default'); ?>" class="delete" name="<?php echo $this->escape($row['section']) ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		
+                                            <span class="tip"><a href="/admin/taxonomies/add-locale" >Add Locale</a></span>
+                                            <span class="tip"><a href="/admin/taxonomies/edit/tr_tid/<?php echo $row['tr_tid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/taxonomies/delete/tr_tid/" class="delete" name="<?php echo 'locale: ' . $row['locale'] .  ', content: ' . $row['content'] ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

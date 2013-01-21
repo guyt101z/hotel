@@ -13,11 +13,12 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
 
         public function getWorld()
         {
-                    $sql = '';
-                    $sql .= ' SELECT w1.*, trw1.tid, trw1.title, trw1.locale, trw2.title as parent FROM world as w1 ';
-                    $sql .= ' RIGHT JOIN translate_world as trw1 ON w1.wid = trw1.wid ';
-                    $sql .= ' LEFT JOIN translate_world as trw2 ON w1.parent_id = trw2.wid';
-                    return $this->_db->query($sql)->fetchAll();
+                $sql = "SELECT DISTINCT trw1.*, world.*, trw2.title as parent FROM translate_world as trw1 ";
+                $sql .= " LEFT JOIN world on trw1.wid = world.wid ";
+                $sql .= " LEFT JOIN translate_world AS trw2 ON world.parent_id = trw2.wid ";
+                $sql .= " ORDER BY trw1.title ASC, trw1.locale ASC";
+                
+                return $this->_db->query($sql)->fetchAll();
         }
         
         public function getWorldById($id) 
@@ -57,14 +58,14 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
         
         public function addTranslateWorld($data = array())
         {
-            if ($this->getTranslateWorld2($data)) {
-                        // alert user that insertion failed.
-                        // implement it later
-                        return null;
-                    } else {
-                        $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES ('" . $data['wid'] .  "', '" . $data['locale'] . "', '" . $data['title'] . "')";
-                        return $this->_db->query($sql2);
-                    }
+                if ($this->getTranslateWorld2($data)) {
+                    // alert user that insertion failed.
+                    // implement it later
+                    return null;
+                } else {
+                    $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES ('" . $data['wid'] .  "', '" . $data['locale'] . "', '" . $data['title'] . "')";
+                    return $this->_db->query($sql2);
+                }
         }
         
         public function getParents()
@@ -80,7 +81,7 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
         
         public function getTranslateWorldById($id) 
         {
-                $sql = 'SELECT * FROM translate_world where trw_id = ' . $id;
+                $sql = 'SELECT * FROM translate_world LEFT JOIN world ON translate_world.wid = world.wid WHERE tr_wid = ' . $id;
                 return $this->_db->query($sql)->fetch();
         }
         

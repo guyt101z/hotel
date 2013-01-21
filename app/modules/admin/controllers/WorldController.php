@@ -49,9 +49,9 @@ class Admin_WorldController extends Zend_Controller_Action
                     }
                     
                 } else { 
-                    $wid = $this->_request->getParam('id');
-                    if ($wid) {
-                        $data = $this->table->getWorldById($wid);
+                    $tr_wid = $this->_request->getParam('id');
+                    if ($tr_wid) {
+                        $data= $this->table->getTranslateWorldById($tr_wid);
                         $form->populate($data);
                     }
                 }
