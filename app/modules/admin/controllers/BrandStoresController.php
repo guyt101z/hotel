@@ -5,13 +5,13 @@ class Admin_BrandStoresController extends Zend_Controller_Action
 	
         public function init() 
         {
-                $this->view->selectedBrands = true;
+                $this->view->selectedBrandStores = true;
                 $this->table = new Admin_Model_DbTable_BrandStores();
         }
 
         public function indexAction() 
         {
-                $this->view->brands = $this->table->getBrandStores();
+                $this->view->stores = $this->table->getBrandStores();
         }
 
         public function addAction() 
@@ -21,7 +21,7 @@ class Admin_BrandStoresController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        $this->table->addBrand($data);
+                        $this->table->addBrandStore($data);
                         $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
@@ -29,6 +29,29 @@ class Admin_BrandStoresController extends Zend_Controller_Action
                 }
                 
                 $this->render('form');
+        }
+        
+        public function addLocaleAction() 
+        {
+                $form = $this->_getForm();
+                $tr_bsid = $this->_request->getParam('tr_bsid');
+                
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->addTranslateBrandStore($data)) {
+                            $this->_helper->redirector('index');
+                        } else {
+                            throw new Zend_Exception('Error occured while adding a new locale');
+                        }
+                    }
+                    
+                } else {
+                    $data = $this->table->getTranslateBrandStore($tr_bsid);
+                    $form->populate($data);
+                }
+                
         }
 
 
@@ -49,6 +72,7 @@ class Admin_BrandStoresController extends Zend_Controller_Action
                 } else {
                     
                     $data = $this->table->getLanguageById($id);
+                    
                     $form->populate($data);
                 }
                 
@@ -68,7 +92,7 @@ class Admin_BrandStoresController extends Zend_Controller_Action
     
         private function _getForm() 
         {
-                $form = new Admin_Form_Brand(array(
+                $form = new Admin_Form_BrandStore(array(
                     'method' => 'post'
                 ));
 

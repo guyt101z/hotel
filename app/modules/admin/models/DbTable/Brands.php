@@ -18,12 +18,18 @@ class Admin_Model_DbTable_Brands extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
+        public function getBrandsNotInBrandStores()
+        {
+                $sql = "SELECT * FROM brand WHERE bid NOT IN (SELECT bid FROM brand_store)";
+                RETURN $this->_db->query($sql)->fetchAll();
+        }
+        
         public function addBrand($data = array()) 
         {
                 $sql = "INSERT INTO `brand` (`title`, `status`) VALUES ('" . $data['title'] . "', '" . $data['status'] . "')";
                 return $this->_db->query($sql);             
         }
-        
+              
         public function updateLanguage($id, $data = array()) 
         {
                 $sql = "UPDATE `lang` SET ";
