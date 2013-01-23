@@ -11,7 +11,7 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
             return $this->_name;
         }
 
-        public function getWorld()
+        public function getWorld($data = null)
         {
             /*
                 $sql = "SELECT DISTINCT trw1.*, world.*, trw2.title as parent FROM translate_world as trw1 ";
@@ -20,6 +20,11 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 $sql .= " ORDER BY trw1.title ASC, trw1.locale ASC";
              */
                 $sql = "SELECT w1.*, w2.name as parent FROM world AS w1 LEFT JOIN world as w2 on w1.parent_id = w2.wid";
+                if ($data) {
+                    if (is_numeric($data)) {
+                        $sql .= " WHERE w1.wid = " . $data;
+                    }
+                }
                 return $this->_db->query($sql)->fetchAll();
         }
         
@@ -72,7 +77,10 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
         
         public function getParents()
         {
-                $sql = 'SELECT * FROM world LEFT JOIN translate_world ON world.wid = translate_world.wid';
+                $sql = "SELECT w1.wid, w1.parent_id, w2.name AS parent 
+                        FROM world AS w1 
+                        LEFT JOIN world AS w2 
+                        ON w1.parent_id = w2.wid";
                 return $this->_db->query($sql)->fetchAll();
         }
         
@@ -169,21 +177,31 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
         return 0;
     }
 
-    /**
-     * Update a job type.
-     * 
-     * @param array $data
-     * @param int $id
-     */
-    public function updateJobCategory($data, $where) 
-    {
-        if ($data && $where) {
-            if (is_numeric($where)) {
-                return $this->update($data, 'job_category_id = ' . $where);
+        public function updateWorld($wid, $data) 
+        {
+            if ($data && $wid) {
+                if (is_numeric($wid)) {
+                    return $this->update($data, 'wid = ' . $wid);
+                }
             }
+            return 0;
         }
-        return 0;
-    }
+    
+        public function updateWorldSQL($wid, $data=array())
+        {
+                $sql = "UPDATE `world` SET ";
+                $i = 0;
+                foreach($data as $k=>$v) {
+                    if ($i == 0) {
+                        $sql .= " `$k`='$v' ";
+                        $i++;
+                    } else {
+                        $sql .= ", `$k`='$v' ";
+                    }
+                }
+                $sql .= " WHERE wid= " . $wid;
+                return $this->_db->query($sql);
+        }
     
     public function deleteJobCategory($where) {
         if ($where == null)

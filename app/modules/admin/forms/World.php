@@ -7,16 +7,20 @@ class Admin_Form_World extends Zend_Form
         {
                 $wid = new Zend_Form_Element_Hidden('wid');
                 
-                $name = new Zend_Form_Element_Select('name');
+                $name = new Zend_Form_Element_Text('name');
                 
                 $parent_id = new Zend_Form_Element_Select('parent_id');
-                //$parent_id->addMultiOption(0, '&nbsp;');
-                $parent_id->setRequired(true);
+                $parent_id->addMultiOption(0, '&nbsp;');
                 $table_world = new Admin_Model_DbTable_World();
                 $parents = $table_world->getParents();
                 if ($parents){
                     foreach ($parents as $p) {
-                        $parent_id->addMultiOption($p['wid'], $p['title']);
+                        if ($p['parent'] != null) {
+                            $parent_id->addMultiOption($p['parent_id'], $p['parent']);
+                        } else {
+                            $parent_id->addMultiOption($p['parent_id'], '&nbsp;');
+                        }
+                        
                     }
                 }
                 

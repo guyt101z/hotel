@@ -30,7 +30,6 @@ class Admin_WorldController extends Zend_Controller_Action
                     }
                 }
                 
-                $this->render('form');
         }
         
         public function addLocaleAction()
@@ -68,25 +67,28 @@ class Admin_WorldController extends Zend_Controller_Action
             $this->view->focusRowArray = $this->table->getWorldRightJoinTranslateWorld($id);
         }
     
-        public function editAction() {
+        public function editAction() 
+        {
             $form = $this->_getForm();
-
-            if ($this->_request->isPost()) {
-                $data = $this->_request->getPost();
-                if ($form->isValid($data)) {
-                    $id = $form->getValue('page_id');
-                    $this->table->updatePage($data, $id);
-                    $this->_redirect('/admin/pages/view/id/' . $this->table->getParentId($id)->parent_id);
+            
+            $id = $this->_request->getParam('wid');
+            
+            if ($id) {
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        $this->table->updateWorldSQL($id, $data);
+                        $this->_redirect('/admin/world');
+                    }
+                } else {
+                    $data = $this->table->getWorld($id);
+                    $form->populate($data[0]); 
+                    $this->view->data = $data[0];
                 }
             } else {
-                $id = $this->_request->getParam('id');
-                if ($id) {
-                    $data = $this->table->getPage($id, true);
-                    $form->populate($data[0]);
-                    $this->view->page = $data[0];
-                }
-                $this->view->id = $id;
+                throw new Exception ('URL is not valid');
             }
+            
         }
         
         public function ajaxGetLocaleByWid() 
