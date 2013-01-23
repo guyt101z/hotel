@@ -12,12 +12,18 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
         }
 
         public function getBrandStores() 
-        {        
+        {
+            /*
                 $sql = "SELECT translate_brand_store.*, brand_store.*, translate_world.title AS world, brand.title AS brand FROM brand_store ";
                 $sql .= " LEFT JOIN translate_brand_store ON brand_store.bsid = translate_brand_store.bsid";
                 $sql .= " LEFT join translate_world ON brand_store.wid = translate_world.wid ";
                 $sql .= " AND translate_brand_store.locale = translate_world.locale";
                 $sql .= " LEFT JOIN brand on brand_store.bid = brand.bid";
+             * 
+             */
+                $sql = "select brand_store.*, brand.title AS brand, brand.`status` AS brand_status, world.`name` as world 
+from brand_store left join brand on brand.bid = brand_store.bid 
+LEFT JOIN world ON brand_store.wid = world.wid ";
                 return $this->_db->query($sql)->fetchAll();
         }
         

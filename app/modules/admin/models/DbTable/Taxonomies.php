@@ -13,7 +13,8 @@ class Admin_Model_DbTable_Taxonomies extends Zend_Db_Table_Abstract
 
         public function getTaxonomies() 
         {        
-                $sql = 'SELECT * FROM translate_taxo left join taxo on translate_taxo.tid = taxo.tid';
+                //$sql = 'SELECT * FROM translate_taxo left join taxo on translate_taxo.tid = taxo.tid';
+                $sql = "SELECT t1.*, t2.name as parent FROM taxo as t1 LEFT JOIN taxo as t2 on t1.parent_id = t2.tid";
                 return $this->_db->query($sql)->fetchAll();
         }
 

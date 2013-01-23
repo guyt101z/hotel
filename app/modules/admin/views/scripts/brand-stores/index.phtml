@@ -20,11 +20,8 @@
                                         <th>Brand</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
-                                        <th>World ID</th>
+                                        <th>World</th>
                                         <th>Status</th>
-                                        <th>Locale</th>
-                                        <th>Title</th>
-                                        <th>Content</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -37,11 +34,8 @@
                                         <td><?php echo $store['lgt'] ?></td>
                                         <td><?php echo $store['world'] ?></td>
                                         <td><?php echo $store['status'] ?></td>
-                                        <td><?php echo $store['locale'] ?></td>
-                                        <td><?php echo $store['title'] ?></td>
-                                        <td><?php echo $store['content'] ?></td>
                                         <td class="center">
-                                            <span class="tip"><a href="/admin/brand-stores/add-locale/tr_bsid/<?php echo $store['tr_bsid'] ?>" class="add_locale" id="add_locale_tr_bsid_<?php echo $store['bsid'] ?>">Add Locale</a></span>
+                                            <span class="tip"><a href="/admin/brand-stores/add-locale/bsid/<?php echo $store['bsid'] ?>" class="add_locale" id="add_locale_tr_bsid_<?php echo $store['bsid'] ?>">Add Locale</a></span>
                                             <span class="tip"><a href="/admin/brand-stores/edit/id/<?php echo $store['bsid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
                                             <span class="tip"><a href="/admin/brand-stores/delete/id/<?php echo $store['bsid'] ?>" class="delete" name="<?php echo $this->escape($store['bsid']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
                                         </td>

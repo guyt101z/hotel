@@ -1,0 +1,54 @@
+<div class="widget" >
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Hotels</span></div>
+    <div class="content">
+        <div id="UITab">
+            <ul class="tabs" >
+                <li class="active"><a href="#tab2">Translate Hotels</a></li>            
+            </ul>
+            <div class="tab_container">
+                <div id="tab2" class="tab_content"> 
+                    <div class="load_page">
+                        <ul class="uibutton-group">
+                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a brand">Add</a></li>
+                        </ul>
+                        <div class="tableName toolbar">
+                            <h3>LIST</h3>
+                            <table class="display data_table2" id="hotels" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Translate Hotel ID</th>
+                                        <th>Hotel ID</th>
+                                        <th>Name</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Locale</th>
+                                        <th>Title</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($this->hotels as $row): ?>
+                                    <tr>
+                                        <td><?php echo $row['tr_hid'] ?></td>
+                                        <td><?php echo $row['hid'] ?></td>
+                                        <td><?php echo $row['name'] ?></td>
+                                        <td><?php echo $row['lat'] ?></td>
+                                        <td><?php echo $row['lgt'] ?></td>
+                                        <td><?php echo $row['locale'] ?></td>
+                                        <td><?php echo $row['title'] ?></td>
+                                        <td class="center">
+                                            <span class="tip"><a href="/admin/brand/edit/id/<?php echo $row['hid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/brand/delete/id/<?php echo $row['hid'] ?>" class="delete" name="<?php echo $this->escape($row['name']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>   
+    </div>
+</div>

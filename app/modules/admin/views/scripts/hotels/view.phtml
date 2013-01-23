@@ -1,0 +1,53 @@
+<div class="widget">
+        <div class="header"><span ><span class="ico gray window"></span>Hotels</span></div>
+        <div class="content">
+                <div id="UITab">
+                        <ul class="tabs">
+                            <li><a href="/admin/hotels">Hotels</a></li>   
+                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
+                        </ul>
+                        
+                        <?php foreach ($this->translate_hotels as $row) { ?>
+                        <form>
+                            <h3 style="margin-top:20px;">Hotel ID = <?php echo $row['hid'] ?> Translate Hotel ID = <?php echo $row['tr_hid'] ?></h3>
+                            <div class="section">
+                                    <label>World</label>   
+                                    <div><?php echo $row['world']; ?></div>
+                            </div>
+
+                            <div class="section">
+                                    <label>Latitude</label>   
+                                    <div><?php echo $row['lat'] ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                    <label>Longitude</label>   
+                                    <div><?php echo $row['lgt'] ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                    <label>Locale</label>   
+                                    <div><?php echo $row['locale'] ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                    <label>Title</label>   
+                                    <div><?php echo $row['title'] ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                    <label>Address</label>   
+                                    <div><?php echo $row['address'] ?></div>
+                            </div>                            
+                            
+                            <div class="section">
+                                    <label>Content</label>   
+                                    <div><?php echo $row['content'] ?></div>
+                            </div>
+                            
+                        </form>
+                        <?php } ?>    
+                             
+                </div>
+        </div>
+</div>

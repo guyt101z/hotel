@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>HOTEL API</title>
+    </head>
+    <body>
+        <div id="api-list">
+            <?php $localhost = "192.168.1.104" ?>
+            <table>
+                <tr>
+                    <th>Controller</th>
+                    <th>URL</th>
+                    <th>Detail</th>
+                </tr>
+                <tr><td>languages</td><td><a href="/api/languages"><?php echo $localhost ?>/api/languages</a></td><td>return all languages in json format</td></tr>
+                <tr><td>world</td><td><a href="/api/world"><?php echo $localhost ?>/api/world</a></td><td>return a world list in json format</td></tr>
+                <tr><td>taxonomies</td><td><a href="/api/taxonomies"><?php echo $localhost ?>/api/taxonomies</a></td><td>return all taxonomies in json format</td></tr>
+                <tr><td rowspan="2">hotels</td><td><a href="/api/hotels"><?php echo $localhost ?>/api/hotels</a></td><td>return all hotels in json format</td></tr>
+                <tr><td><a href="/api/hotels/get/hid/1"><?php echo $localhost ?>/api/hotels/get/hid/1</a></td>
+                    <td>return hotel info by hid (hotel id)</td>
+                </tr>
+                <tr><td>brands</td><td><a href="/api/brands"><?php echo $localhost ?>/api/brands</a></td><td>return all brands in json format</td></tr>
+                <tr><td>brand-stores</td><td><a href="/api/brand-stores"><?php echo $localhost ?>/api/brand-stores</a></td><td>return all brand stores in json format</td></tr>
+                
+            </table>
+        </div>
+        <div id="requests">
+            <h3>Requests</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Request</th>
+                    <th>Status</th>
+                    <th>Created Timestamp</th>
+                </tr>
+                <?php if (isset($this->requests)) { ?>
+                    <?php foreach ($this->requests as $row) { ?>
+                        <tr>
+                            <td><?php echo $row['request_id'] ?></td>
+                            <td><?php echo $row['request'] ?></td>
+                            <td><?php echo $row['status'] ?></td>
+                            <td><?php echo $row['created_ts'] ?></td>
+                        </tr>
+                    <?php } ?>
+                <?php } ?>
+            </table>
+            <h3>Write your request</h3>
+            <form enctype="multipart/form-data" name="formRequest" id="formRequest" action="/api/index" method="post">
+                <div class="section">
+                        <label>Request</label>   
+                        <div><?php echo $this->request_form->request; ?></div>
+                </div>
+                <div class="section last">
+                        <div><input type="submit" value="Submit"></div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+
+<style type="text/css">
+
+* 
+{
+    margin: 0px auto;
+    font-size: 16px;
+    font-family: sans-serif;
+    width: 960px;
+}
+
+a {
+    text-decoration: underline;
+}
+
+h3 
+{
+    margin-top: 20px;
+}
+
+table 
+{
+    width: 100%;
+    border-spacing: 0px;
+}
+
+table tr {
+    height: 30px;
+}
+table tr th {
+    text-align: left;
+    border-collapse: collapse;
+    margin: 0px;
+}
+
+table tr td 
+{
+    border-collapse: collapse;
+    border: 1px solid grey;
+    margin: 0px;
+}
+    
+#requests 
+{
+    margin-top: 20px;
+}
+
+#requests form {
+    margin-top: 20px;
+}
+</style>
+
+
+

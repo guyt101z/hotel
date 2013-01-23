@@ -13,11 +13,13 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
 
         public function getWorld()
         {
+            /*
                 $sql = "SELECT DISTINCT trw1.*, world.*, trw2.title as parent FROM translate_world as trw1 ";
                 $sql .= " LEFT JOIN world on trw1.wid = world.wid ";
                 $sql .= " LEFT JOIN translate_world AS trw2 ON world.parent_id = trw2.wid ";
                 $sql .= " ORDER BY trw1.title ASC, trw1.locale ASC";
-                
+             */
+                $sql = "SELECT w1.*, w2.name as parent FROM world AS w1 LEFT JOIN world as w2 on w1.parent_id = w2.wid";
                 return $this->_db->query($sql)->fetchAll();
         }
         
