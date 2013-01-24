@@ -17,7 +17,7 @@ class Admin_UsersController extends Zend_Controller_Action
         public function addAction() 
         {
                 $form = $this->_getForm();
-
+                $form->removeElement('pwd');
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
@@ -35,21 +35,21 @@ class Admin_UsersController extends Zend_Controller_Action
         public function editAction() 
         {
                 $form = $this->_getForm();
+                $form->removeElement('pwd');
                 $id = $this->_request->getParam('id');
                 
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        if ($this->table->updateLanguage($id, $data)) {
+                        if ($this->table->updateUser($id, $data)) {
                             $this->_helper->redirector('index');
                         } else {
                             throw new Zend_Exception('Error occured while adding a new language. ');
                         }
                     }
                 } else {
-                    
-                    $data = $this->table->getLanguageById($id);
-                    $form->populate($data);
+                    $data = $this->table->getUser($id);
+                    $form->populate($data->toArray());
                 }
                 
                 $this->render('form');
@@ -59,7 +59,7 @@ class Admin_UsersController extends Zend_Controller_Action
         {
                 $id = $this->getRequest()->getParam('id');
                 
-                if ($this->table->deleteLanguageById($id))  
+                if ($this->table->deleteUser($id))  
                     $this->_helper->redirector('index');
                 else 
                     throw new Zend_Exception('error occured while deleting this language. ');

@@ -39,8 +39,8 @@
                                         <td><?php echo $user['user_type'] ?></td>
                                         <td><?php echo $user['status'] ?></td>
                                         <td class="center">
-                                            <span class="tip"><a href="/admin/languages/edit/id/<?php echo $user['uid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="/admin/languages/delete/id/<?php echo $user['uid'] ?>" class="delete" name="<?php echo $this->escape($user['email']) ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
+                                            <span class="tip"><a href="/admin/users/edit/id/<?php echo $user['uid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/users/delete/id/<?php echo $user['uid'] ?>" class="delete" name="<?php echo $this->escape($user['email']) ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

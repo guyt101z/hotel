@@ -63,33 +63,35 @@ class Admin_Model_DbTable_Users extends Zend_Db_Table_Abstract
             return $this->fetchRow($select);
     }
 
-    /**
-     * Get user by id.
-     * 
-     * @param int $id
-     * @return the user row or null 
-     */
-    public function getUser($id) {
-            return $this->fetchRow('user_id = ' . (int)$id);
-    }
+        /**
+         * Get user by id.
+         * 
+         * @param int $id
+         * @return the user row or null 
+         */
+        public function getUser($id) 
+        {
+                return $this->fetchRow('uid = ' . (int)$id);
+        }
     
        
 
-    /**
-     * Update a user profile
-     * 
-     * @param int $id
-     * @param array $data 
-     * 
-     * @return 1 if sucessful otherwise 0
-     */
-    public function editUser($id, $data) {
-            if ($data) {
-                    $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
-                    return $this->update($data, $where);
-            }
-            return false;
-    }
+        /**
+         * Update a user profile
+         * 
+         * @param int $id
+         * @param array $data 
+         * 
+         * @return true if sucessful otherwise false
+         */
+        public function updateUser($id, $data) 
+        {
+                if ($data) {
+                        $where = $this->getAdapter()->quoteInto('uid = ?', (int)$id);
+                        return $this->update($data, $where);
+                }
+                return false;
+        }
         
         public function getUsers() 
         {
@@ -99,20 +101,18 @@ class Admin_Model_DbTable_Users extends Zend_Db_Table_Abstract
         
         public function addUser($data = array())
         {
-                $sql = "INSERT INTO `user` (`first_name`, `last_name`, `company_name`, `email`, `pwd`, `power`, `user_type`, `status`) VALUES ("
+                $sql = "INSERT INTO `user` (`first_name`, `last_name`, `company_name`, `email`, `power`, `user_type`, `status`) VALUES ("
                         . "'" . $data['first_name'] . "', "
                         . "'" . $data['last_name'] . "', "
                         . "'" . $data['company_name'] . "', "
                         . "'" . $data['email'] . "', "
-                        . "'" . $data['pwd'] . "', "
                         . "'" . $data['power'] . "', " 
-                        . 
-                
-            $sql = "INSERT INTO `world` (`parent_id`, `lat`, `lgt`) VALUES ('" . $data['parent_id'] . "', '" . $data['lat'] . "', '" . $data['lgt'] . "')";
-                if ($this->_db->query($sql)) {
-                    $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES (LAST_INSERT_ID(), '" . $data['locale'] . "', '" . $data['title'] . "')";
-                    return $this->_db->query($sql2);
-                }
-                return null;            
+                        . "'" . $data['user_type'] . "', '" . $data['status'] . "')";
+                return $this->_db->query($sql);
+        }
+        
+        public function deleteUser($id)
+        {
+                return $this->delete('uid = ' . $id);
         }
 }
