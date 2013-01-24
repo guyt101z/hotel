@@ -1,18 +1,17 @@
 <?php
 
-class Admin_WorldController extends Zend_Controller_Action 
+class Admin_TranslateWorldController extends Zend_Controller_Action 
 {
 
         public function init() 
         {
                 $this->view->selectedWorld = true;
-                $this->table = new Admin_Model_DbTable_World();    
-                $this->translate_world_table = new Admin_Model_DbTable_TranslateWorld();
+                $this->table = new Admin_Model_DbTable_TranslateWorld();
         }
 
         public function indexAction() 
         {
-                $this->view->focusRowArray = $this->table->getWorld();
+                $this->view->focusRowArray = $this->table->getTranslateWorld();
                 $this->view->error_message =  $this->_helper->getHelper('FlashMessenger')->getMessages();
         }
         

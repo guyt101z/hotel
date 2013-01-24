@@ -28,6 +28,12 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
+        public function getWorldNoJoin() 
+        {
+                $sql = "SELECT * FROM world";
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
         public function getWorldById($id) 
         {
                 $sql = '';
@@ -94,14 +100,14 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 $sql = 'SELECT * FROM translate_world LEFT JOIN world ON translate_world.wid = world.wid WHERE tr_wid = ' . $id;
                 return $this->_db->query($sql)->fetch();
         }
-        
+        /*
         public function getTranslateWorld($data = array()) 
         {
                 $sql = "SELECT * FROM translate_world WHERE `wid` = '" . $data['wid'] . "'";
                 $sql .= " AND `locale` = '" . $data['locale'] . "' AND `title` = '" . $data['title'] . "'";
                 return $this->_db->query($sql)->fetchAll();
         }
-        
+        */
         public function getTranslateWorld2($data = array()) 
         {
                 $sql = "SELECT * FROM translate_world ";
@@ -142,40 +148,25 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
             return $this->fetchAll($select);
         }
 
-    /**
-     * Get job type titles.
-     * 
-     * @return array
-     */
-    public function getJobCategoryTitles() {
-            $rows = $this->fetchAll();
-            $titles = array();
-            foreach ($rows as $row)
-                    $titles[$row->job_category_id] = $row->name;
-            return $titles;
-    }
+        public function getJobCategoryTitles() {
+                $rows = $this->fetchAll();
+                $titles = array();
+                foreach ($rows as $row)
+                        $titles[$row->job_category_id] = $row->name;
+                return $titles;
+        }
 
 
-    /**
-     * Add a new job category.
-     * 
-     * @param string name
-     */
-    public function addJobCategory($data) 
-    {
-        if (is_string($data)) {
-            $row = $this->createRow();
-            $row->name = $data;
-            $row->save();
-            return $row->job_category_id;
-        } 
-        
-        if (is_array($data)) {
+        public function addWorld($data = array()) 
+        {
             return $this->insert($data);
         }
         
-        return 0;
-    }
+        public function addWorldSQL($data = array())
+        {
+                $sql = "INSERT INTO `world` (`name`, `parent_id`, `lat`, `lgt`) VALUES ('" . $data['name'] .  "', '" . $data['parent_id'] . "', '" . $data['lat'] . "', '" . $data['lgt'] . "')";
+                return $this->_db->query($sql);
+        }
 
         public function updateWorld($wid, $data) 
         {
@@ -203,16 +194,20 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql);
         }
     
-    public function deleteJobCategory($where) {
-        if ($where == null)
+        public function deleteWorld($where) 
+        {
+            if (is_numeric($where)) {
+                return $this->delete('wid = ' . $where);
+            }
+            if (is_string($where)) {
+                return $this->delete($where);
+            }
             return 0;
+        }
         
-        if (is_numeric($where)) {
-            return $this->delete('job_category_id = ' . $where);
+        public function deleteWorldSQL($wid)
+        {
+                $sql = "DELETE FROM `world` WHERE `wid`='$wid'";
+                return $this->_db->query($sql);
         }
-        if (is_string($where)) {
-            return $this->delete($where);
-        }
-        return 0;
-    }
 }

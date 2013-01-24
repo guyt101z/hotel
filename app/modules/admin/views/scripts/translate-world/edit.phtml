@@ -4,11 +4,16 @@
         <div id="UITab">
             <ul class="tabs">
                 <li><a href="/admin/world">World</a></li>   
-                <li class="active"><a href="#">Add</a></li>          
+                <li class="active"><a href="#"><?php echo $this->data['name'] ?></a></li>          
             </ul>
                         
             <form enctype="multipart/form-data" name="formWorld" id="formWorld" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
                                 
+                <div class="section">
+                    <label>World ID <small>required.</small></label>   
+                    <div><input type="text" name="wid" id="wid" value="<?php echo $this->data['wid'] ?>" disabled="true"></div>
+                </div>
+
                 <div class="section">
                         <label>Name <small>required.</small></label>   
                         <div><?php echo $this->form->name ?></div>

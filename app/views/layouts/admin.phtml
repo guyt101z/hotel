@@ -101,17 +101,23 @@
                     <ul id="main_menu" class="main_menu">
                       <li class="limenu<?php if($this->selectedDashboard): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'dashboard'), 'default', true); ?>"><span class="ico gray shadow home" ></span><b><?php echo $this->translate('Dashboard') ?></b></a></li>
                       <li class="limenu<?php if($this->selectedLanguages): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'languages'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b><?php echo $this->translate('Languages') ?></b></a></li>
-                      <li class="limenu<?php if($this->selectedWorld): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'world'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>World</b></a></li>
+                      <li class="limenu<?php if($this->selectedWorld): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'world'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>World</b></a>
+                          <ul>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'world',), 'default', true); ?>">World</a></li>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'translate-world',), 'default', true); ?>">Translate World</a></li>
+                          </ul>
+                      </li>
+                      
                       <li class="limenu<?php if($this->selectedUsers): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'users'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Users</b></a></li>
                       <li class="limenu<?php if($this->selectedTaxonomies): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'taxonomies'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Taxonomies</b></a></li>                      
                       <li class="limenu<?php if($this->selectedBrands): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brands'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Brands</b></a></li>
                       <li class="limenu<?php if($this->selectedBrandStores): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brand-stores'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Brand Stores</b></a></li>
                       <li class="limenu<?php if($this->selectedArticles): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'articles'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Articles</b></a></li>
                       <li class="limenu<?php if($this->selectedHotels): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'hotels'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Hotels</b></a>
-                        <ul>
-                            <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'hotels',), 'default', true); ?>">Hotels</a></li>
-                            <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'translate-hotels',), 'default', true); ?>">Translate Hotels</a></li>
-                        </ul>
+                          <ul>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'hotels',), 'default', true); ?>">Hotels</a></li>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'translate-hotels',), 'default', true); ?>">Translate Hotels</a></li>
+                          </ul>
                       </li>
                       <li class="limenu<?php if($this->selectedHotelUsers): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'hotel-users'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Hotel Users</b></a></li>
 
