@@ -13,33 +13,38 @@ class Admin_Model_DbTable_Taxonomies extends Zend_Db_Table_Abstract
 
         public function getTaxonomies() 
         {        
-                //$sql = 'SELECT * FROM translate_taxo left join taxo on translate_taxo.tid = taxo.tid';
                 $sql = "SELECT t1.*, t2.name as parent FROM taxo as t1 LEFT JOIN taxo as t2 on t1.parent_id = t2.tid";
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+        public function getTaxonomy($id)
+        {
+                $sql = "SELECT * FROM taxo WHERE tid = " . $id;
+                return $this->_db->query($sql)->fetch();
+        }
+        
+        public function getTaxonomyNames() 
+        {
+                $sql = "SELECT * FROM taxo";
                 return $this->_db->query($sql)->fetchAll();
         }
 
         public function addTaxonomy($data = array())
         {
-                // add to taxo table
-                $tid = $this->insert(array(
-                    'parent_id' => $data['parent_id'],
-                    'pos' => $data['pos'],
-                    'section' => $data['section']
-                ));
-
-                if ($tid) {
-                    // add to translate taxo table iff the entry does not exist
-                    $data['tid'] = $tid;
-                    if ($this->getTranslateTaxo($data)) {   
-                        $this->delete('tid='.$tid);
-                    } else {
-                        $sql = "INSERT INTO `translate_taxo` (`tid`, `locale`, `content`) VALUES ('" . $data['tid'] . "', '" . $data['locale'] . "', '" . $data['content'] . "')";
-                        return $this->_db->query($sql);
-                    }
-                }
-
-                return null;             
+                return $this->insert($data);
         }
+        
+        public function updateTaxonomy($id, $data = array()) 
+        {
+                return $this->update($data, 'tid = ' . $id);
+        }
+        
+        public function deleteTaxonomy($id) 
+        {
+                return $this->delete('tid = ' . $id);
+        }
+        
+        //============================ FUNCTIONS NOT USED ===============================================================================================
         
         public function editTranslateTaxoById($data)
         {
@@ -147,21 +152,7 @@ class Admin_Model_DbTable_Taxonomies extends Zend_Db_Table_Abstract
         return 0;
     }
 
-    /**
-     * Update a job type.
-     * 
-     * @param array $data
-     * @param int $id
-     */
-    public function updateJobCategory($data, $where) 
-    {
-        if ($data && $where) {
-            if (is_numeric($where)) {
-                return $this->update($data, 'job_category_id = ' . $where);
-            }
-        }
-        return 0;
-    }
+
     
     public function deleteJobCategory($where) {
         if ($where == null)

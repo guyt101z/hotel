@@ -16,31 +16,25 @@
                             <table class="display data_table2" id="languages" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Store Name</th>
-                                        <th>Brand</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
-                                        <th>World</th>
-                                        <th>Store Status</th>
-                                        <th>Brand Status</th>
+                                        <th>Translate Brand Store ID</th>
+                                        <th>Brand Store</th>
+                                        <th>Locale</th>
+                                        <th>Title</th>
+                                        <th>Content</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($this->stores as $store): ?>
                                     <tr>
+                                        <td><?php echo $store['tr_bsid'] ?></td>
                                         <td><?php echo $store['bsid'] ?></td>
-                                        <td><?php echo $store['name'] ?></td>
-                                        <td><?php echo $store['brand'] ?></td>
-                                        <td><?php echo $store['lat'] ?></td>
-                                        <td><?php echo $store['lgt'] ?></td>
-                                        <td><?php echo $store['world'] ?></td>
-                                        <td><?php echo $store['brand_store_status'] ?></td>
-                                        <td><?php echo $store['brand_status'] ?></td>
+                                        <td><?php echo $store['locale'] ?></td>
+                                        <td><?php echo $store['title'] ?></td>
+                                        <td><?php echo $store['content'] ?></td>
                                         <td class="center">
-                                            <span class="tip"><a href="/admin/brand-stores/edit/id/<?php echo $store['bsid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="/admin/brand-stores/delete/id/<?php echo $store['bsid'] ?>" class="delete" name="<?php echo $this->escape($store['name']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
+                                            <span class="tip"><a href="/admin/translate-brand-stores/edit/id/<?php echo $store['tr_bsid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/translate-brand-stores/delete/id/<?php echo $store['tr_bsid'] ?>" class="delete" name="<?php echo $this->escape($store['title']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

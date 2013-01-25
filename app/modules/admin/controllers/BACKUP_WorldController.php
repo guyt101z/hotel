@@ -23,6 +23,7 @@ class Admin_WorldController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
+                        //$this->table->addWorldSingleLocale($data);
                         $this->table->addWorldSQL($data);
                         $this->_helper->redirector('index');
                     } else {
@@ -30,6 +31,7 @@ class Admin_WorldController extends Zend_Controller_Action
                     }
                 }
         }
+        
         
         public function editAction() 
         {
@@ -101,6 +103,21 @@ class Admin_WorldController extends Zend_Controller_Action
             $this->view->focusRowArray = $this->table->getWorldRightJoinTranslateWorld($id);
         }
     
+
+        
+        public function ajaxGetLocaleByWid() 
+        {
+                $this->_helper->getHelper('layout')->disableLayout();
+                $this->_helper->viewRenderer->setNoRender();
+
+                $wid = $this->getRequest()->getParam('id');
+                if ($wid) {
+                        $title = $this->table->getLocaleByWid($wid);
+                        echo json_encode($title);
+                }
+                echo '0';
+        }
+    
         private function _getForm() 
         {
             $form = new Admin_Form_World(array(
@@ -109,6 +126,15 @@ class Admin_WorldController extends Zend_Controller_Action
 
             $this->view->form = $form;
             return $form;
+        }
+        
+        private function _getTranslateWorldForm()
+        {
+                $form = new Admin_Form_TranslateWorld(array(
+                    'method' => 'post'
+                ));
+                $this->view->form = $form;
+                return $form;
         }
 }
 ?>

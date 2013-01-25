@@ -1,18 +1,17 @@
 <?php
 
-class Admin_WorldController extends Zend_Controller_Action 
+class Admin_TranslateTaxonomiesController extends Zend_Controller_Action 
 {
 
         public function init() 
         {
-                $this->view->selectedWorld = true;
-                $this->table = new Admin_Model_DbTable_World();    
-                $this->translate_world_table = new Admin_Model_DbTable_TranslateWorld();
+                $this->view->selectedTaxonomies = true;
+                $this->table = new Admin_Model_DbTable_TranslateTaxonomies();
         }
 
         public function indexAction() 
         {
-                $this->view->focusRowArray = $this->table->getWorld();
+                $this->view->focusRowArray = $this->table->getTranslateTaxonomies();
                 $this->view->error_message =  $this->_helper->getHelper('FlashMessenger')->getMessages();
         }
         
@@ -23,6 +22,7 @@ class Admin_WorldController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
+                        //$this->table->addWorldSingleLocale($data);
                         $this->table->addWorldSQL($data);
                         $this->_helper->redirector('index');
                     } else {
@@ -30,6 +30,7 @@ class Admin_WorldController extends Zend_Controller_Action
                     }
                 }
         }
+        
         
         public function editAction() 
         {
@@ -101,14 +102,30 @@ class Admin_WorldController extends Zend_Controller_Action
             $this->view->focusRowArray = $this->table->getWorldRightJoinTranslateWorld($id);
         }
     
+
+        
+        public function ajaxGetLocaleByWid() 
+        {
+                $this->_helper->getHelper('layout')->disableLayout();
+                $this->_helper->viewRenderer->setNoRender();
+
+                $wid = $this->getRequest()->getParam('id');
+                if ($wid) {
+                        $title = $this->table->getLocaleByWid($wid);
+                        echo json_encode($title);
+                }
+                echo '0';
+        }
+    
         private function _getForm() 
         {
-            $form = new Admin_Form_World(array(
+            $form = new Admin_Form_TranslateTaxonomy(array(
                 'method' => 'post'
             ));
 
             $this->view->form = $form;
             return $form;
         }
+
 }
 ?>

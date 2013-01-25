@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
+class Admin_Model_DbTable_TranslateBrandStores extends Zend_Db_Table_Abstract
 {
     
         protected $_name = 'brand_store';
@@ -11,28 +11,7 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
                 return $this->_name;
         }
 
-        public function getBrandStores() 
-        {
-                $sql = "SELECT bs.bsid, bs.bid, bs.wid, world.name as world, bs.name, bs.lat, bs.lgt, bs.status AS brand_store_status, 
-                        brand.title AS brand, brand.status AS brand_status 
-                        FROM brand_store AS bs
-                        LEFT JOIN brand on bs.bid = brand.bid
-                        LEFT JOIN world on bs.wid = world.wid";
-                return $this->_db->query($sql)->fetchAll();
-        }
-        
-        public function getBrandStore($id) 
-        {
-                return $this->fetchRow('bsid = ' . $id)->toArray();
-        }
-        
-        public function updateBrandStore($id, $data = array())
-        {
-                return $this->update($data, 'bsid = ' . $id);
-        }
-        
-        // =============================
-        public function getBrandStoresOlddddddd()
+        public function getTranslateBrandStores() 
         {
             /*
                 $sql = "SELECT translate_brand_store.*, brand_store.*, translate_world.title AS world, brand.title AS brand FROM brand_store ";
@@ -42,6 +21,10 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
                 $sql .= " LEFT JOIN brand on brand_store.bid = brand.bid";
              * 
              */
+                $sql = "SELECT tbs1.*, bs1.bid, bs1.lat, bs1.lgt, bs1.wid, bs1.status 
+                        FROM translate_brand_store AS tbs1 
+                        LEFT JOIN brand_store AS bs1 ON tbs1.bsid = bs1.bsid";
+                return $this->_db->query($sql)->fetchAll();
         }
         
         public function getTranslateBrandStore($data) 

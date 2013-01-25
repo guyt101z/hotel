@@ -1,48 +1,38 @@
 <div class="widget">
-        <div class="header"><span ><span class="ico gray window"></span>World</span></div>
-        
-        <div class="content">
-                
-                <div id="UITab">
-                    
-                        <ul class="tabs">
-                            <li><a href="/admin/world">World</a></li>   
-                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
-                        </ul>
-                        
-                        <form enctype="multipart/form-data" name="formTaxonomy" id="formTaxonomy" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
-                                
-                                <div class="section">
-                                        <label>Parent <small>required.</small></label>   
-                                        <div><?php echo $this->form->parent_id; ?></div>
-                                </div>
+    <div class="header"><span ><span class="ico gray window"></span>Taxonomies</span></div>
+    <div class="content">
+        <div id="UITab">
+            <ul class="tabs">
+                <li><a href="/admin/taxonomies">Taxonomies</a></li>   
+                <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
+            </ul>
+            <form enctype="multipart/form-data" name="formTaxonomy" id="formTaxonomy" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
 
-                                <div class="section">
-                                        <label>Section <small>required.</small></label>   
-                                        <div><?php echo $this->form->section; ?></div>
-                                </div>
-
-                                <div class="section">
-                                        <label>Locale <small>required.</small></label>   
-                                        <div><?php echo $this->form->locale; ?></div>
-                                </div>
-                            
-                                <div class="section">
-                                        <label>Content <small>required.</small></label>   
-                                        <div><?php echo $this->form->content; ?></div>
-                                </div>
-                            
-                                <div class="section">
-                                        <label>Position <small>optional.</small></label>   
-                                        <div><?php echo $this->form->pos; ?></div>
-                                </div>
-                            
-                                <div class="section last">
-                                        <div><a class="uibutton submit_form" >Valider</a></div>
-                                </div>
-
-                        </form>
+                <div class="section">
+                        <label>Name <small>required.</small></label>   
+                        <div><?php echo $this->form->name; ?></div>
                 </div>
+                
+                <div class="section">
+                        <label>Parent <small>required.</small></label>   
+                        <div><?php echo $this->form->parent_id; ?></div>
+                </div>
+
+                <div class="section">
+                        <label>Section <small>required.</small></label>   
+                        <div><?php echo $this->form->section; ?></div>
+                </div>
+
+                <div class="section">
+                        <label>Position <small>optional.</small></label>   
+                        <div><?php echo $this->form->pos; ?></div>
+                </div>
+                            
+                <div class="section last">
+                        <div><a class="uibutton submit_form" >Submit</a></div>
+                </div>
+            </form>
         </div>
+    </div>
 </div>
 

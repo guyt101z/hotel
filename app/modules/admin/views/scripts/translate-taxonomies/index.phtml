@@ -1,0 +1,53 @@
+<div class="error-msg"><?php if ($this->error_message) echo $this->error_message[0] ?></div>
+<div class="widget" >
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Taxonomies</span></div>
+        <div class="content">
+            <div id="UITab">
+                <ul class="tabs" >
+                            <li class="active"><a href="/admin/translate-taxonomies">Translate Taxonomies</a></li>            
+                    </ul>
+                <div class="tab_container">
+                    <div id="tab2" class="tab_content"> 
+                                <div class="load_page">
+                                    <ul class="uibutton-group">
+                                            <li><a href="/admin/translate-taxonomies/add" class="uibutton icon add" title="Add">Add</a></li>
+                                    </ul>
+                                    <div class="tableName toolbar">
+                                        <h3><?php echo $this->translate('list') ?></h3>
+                                        <table class="display data_table2" id="world" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Translate Taxo ID</th>
+                                                    <th>Taxo</th>
+                                                    <th>Locale</th>
+                                                    <th>Content</th>
+                                                    <th>Position</th>
+                                                    <th>Section</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach($this->focusRowArray as $row): ?>
+                                                <tr>
+                                                    <td><?php echo $row['tr_tid'] ?></td>
+                                                    <td><?php echo $row['name'] ?></td>
+                                                    <td><?php echo $row['locale'] ?></td>
+                                                    <td><?php echo $row['content'] ?></td>
+                                                    <td><?php echo $row['pos'] ?></td>
+                                                    <td><?php echo $row['section'] ?></td>
+                                                    <td class="center">
+                                                        <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'id' => $row['tr_tid']), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                                        <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'id' => $row['tr_tid']), 'default'); ?>" class="delete" name="<?php echo $this->escape($row['content']) ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        <div class="clear"></div>   
+    </div>
+</div>

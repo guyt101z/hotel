@@ -1,0 +1,29 @@
+<?php 
+
+class Admin_Form_TranslateTaxonomy extends Zend_Form 
+{	
+
+    public function init() 
+    {
+        $tr_hid = new Zend_Form_Element_Hidden('tr_hid');
+        
+        $tid = new Zend_Form_Element_Text('tid');
+        
+        $locale = new Zend_Form_Element_Text('locale');
+        $name = new Zend_Form_Element_Select('name');
+        $name->setRequired(true);
+        
+        $lat = new Zend_Form_Element_Text('lat');
+        
+        $lgt = new Zend_Form_Element_Text('lgt');
+        
+        $this->addElements(array($tr_hid, $name, $lat, $lgt));
+        
+        foreach($this->getElements() as $element) {
+            $element->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
+        }
+    }
+
+}
+
+?>

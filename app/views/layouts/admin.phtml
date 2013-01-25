@@ -109,9 +109,19 @@
                       </li>
                       
                       <li class="limenu<?php if($this->selectedUsers): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'users'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Users</b></a></li>
-                      <li class="limenu<?php if($this->selectedTaxonomies): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'taxonomies'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Taxonomies</b></a></li>                      
+                      <li class="limenu<?php if($this->selectedTaxonomies): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'taxonomies'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Taxonomies</b></a>
+                          <ul>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'taxonomies',), 'default', true); ?>">Taxonomies</a></li>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'translate-taxonomies',), 'default', true); ?>">Translate Taxonomies</a></li>
+                          </ul>
+                      </li>                      
                       <li class="limenu<?php if($this->selectedBrands): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brands'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Brands</b></a></li>
-                      <li class="limenu<?php if($this->selectedBrandStores): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brand-stores'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Brand Stores</b></a></li>
+                      <li class="limenu<?php if($this->selectedBrandStores): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brand-stores'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Brand Stores</b></a>
+                          <ul>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brand-stores',), 'default', true); ?>">Brand Stores</a></li>
+                              <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'translate-brand-stores',), 'default', true); ?>">Translate Brand Stores</a></li>
+                          </ul>
+                      </li>
                       <li class="limenu<?php if($this->selectedArticles): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'articles'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Articles</b></a></li>
                       <li class="limenu<?php if($this->selectedHotels): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'hotels'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Hotels</b></a>
                           <ul>

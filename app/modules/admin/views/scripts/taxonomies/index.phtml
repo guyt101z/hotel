@@ -29,13 +29,12 @@
                                     <tr>
                                         <td><?php echo $row['tid'] ?></td>
                                         <td><?php echo $row['name'] ?></td>
-                                        <td><?php echo $row['parent_id'] ?></td>
+                                        <td><?php echo $row['parent'] ?></td>
                                         <td><?php echo $row['pos'] ?></td>
                                         <td><?php echo $row['section'] ?></td>
                                         <td class="center">
-                                            <span class="tip"><a href="/admin/taxonomies/add-locale" >Add Locale</a></span>
-                                            <span class="tip"><a href="/admin/taxonomies/edit/tr_tid/<?php echo $row['tid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="/admin/taxonomies/delete/tr_tid/" class="delete" name="<?php echo 'locale: ' . $row['name'] ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		
+                                            <span class="tip"><a href="/admin/taxonomies/edit/id/<?php echo $row['tid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/taxonomies/delete/id/<?php echo $row['tid'] ?>" class="delete" name="<?php echo $row['name'] ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
