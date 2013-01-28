@@ -3,7 +3,7 @@
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li class="active"><a href="#tab2">Brand Stores</a></li>            
+                <li class="active"><a href="#tab2">Translate Brand Stores</a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
@@ -28,7 +28,7 @@
                                     <?php foreach($this->stores as $store): ?>
                                     <tr>
                                         <td><?php echo $store['tr_bsid'] ?></td>
-                                        <td><?php echo $store['bsid'] ?></td>
+                                        <td><?php echo $store['name'] ?></td>
                                         <td><?php echo $store['locale'] ?></td>
                                         <td><?php echo $store['title'] ?></td>
                                         <td><?php echo $store['content'] ?></td>
@@ -48,35 +48,3 @@
         <div class="clear"></div>   
     </div>
 </div>
-
-<div class="dialog" style="display:none;">
-                <label>Locale</label>   
-                <input type="text" name="locale" id="locale" value="" />
-</div>
-
-<script type="text/javascript">
-$(function(){
-    $('.add_locale').click(function(event) {
-        /*
-        event.preventDefault();
-        var bsid = $(this).attr('id').substring(19);
-        $('.dialog').dialog({
-            height: 200,
-            width: 350,
-            title: 'ADD A NEW LOCALE'
-            buttons: {
-                "Submit": function() {
-                    
-                }, 
-                "Cancel": function() {
-                    $(this).dialog("close");
-                }
-            },
-            close: function() {
-                $('#locale').val('');
-            }
-        });
-        */
-    });
-});
-</script>

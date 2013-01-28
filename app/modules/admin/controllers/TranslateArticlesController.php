@@ -1,28 +1,27 @@
 <?php
 
-class Admin_ArticlesController extends Zend_Controller_Action  
+class Admin_TranslateArticlesController extends Zend_Controller_Action 
 {
-    
-        public function init()
+	
+        public function init() 
         {
                 $this->view->selectedArticles = true;
-                $this->table = new Admin_Model_DbTable_Articles();
+                $this->table = new Admin_Model_DbTable_TranslateArticles();
         }
-        
+
         public function indexAction() 
         {
-                $this->view->articles = $this->table->getArticles();
+                $this->view->stores = $this->table->getTranslateBrandStores();
         }
-        
+
         public function addAction() 
         {
                 $form = $this->_getForm();
 
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
-                    $data['cdate'] = new Zend_Db_Expr('NOW()');
                     if ($form->isValid($data)) {
-                        $this->table->addArticle($data);
+                        $this->table->addTranslateBrandStore($data);
                         $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
@@ -40,24 +39,20 @@ class Admin_ArticlesController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        if ($this->table->updateArticle($id, $data)) {
+                        if ($this->table->updateLanguage($id, $data)) {
                             $this->_helper->redirector('index');
                         } else {
-                            throw new Zend_Exception('Error occured');
+                            throw new Zend_Exception('Error occured while adding a new language. ');
                         }
                     }
                 } else {
-                    $data = $this->table->getArticle($id);
+                    
+                    $data = $this->table->getLanguageById($id);
+                    
                     $form->populate($data);
                 }
                 
                 $this->render('form');
-        }
-        
-        public function viewAction()
-        {
-                $id = $this->getRequest()->getParam('id');
-                $this->view->article = $this->table->getArticle($id);
         }
 
         public function deleteAction() 
@@ -73,7 +68,7 @@ class Admin_ArticlesController extends Zend_Controller_Action
     
         private function _getForm() 
         {
-                $form = new Admin_Form_Article(array(
+                $form = new Admin_Form_TranslateBrandStore(array(
                     'method' => 'post'
                 ));
 

@@ -21,7 +21,7 @@ class Admin_TranslateBrandStoresController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        $this->table->addBrandStore($data);
+                        $this->table->addTranslateBrandStore($data);
                         $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
@@ -31,30 +31,6 @@ class Admin_TranslateBrandStoresController extends Zend_Controller_Action
                 $this->render('form');
         }
         
-        public function addLocaleAction() 
-        {
-                $form = $this->_getForm();
-                $tr_bsid = $this->_request->getParam('tr_bsid');
-                
-                
-                if ($this->_request->isPost()) {
-                    $data = $this->_request->getPost();
-                    if ($form->isValid($data)) {
-                        if ($this->table->addTranslateBrandStore($data)) {
-                            $this->_helper->redirector('index');
-                        } else {
-                            throw new Zend_Exception('Error occured while adding a new locale');
-                        }
-                    }
-                    
-                } else {
-                    $data = $this->table->getTranslateBrandStore($tr_bsid);
-                    $form->populate($data);
-                }
-                
-        }
-
-
         public function editAction() 
         {
                 $form = $this->_getForm();

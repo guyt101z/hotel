@@ -24,9 +24,9 @@ class Admin_Form_Taxonomy extends Zend_Form
         $section = new Zend_Form_Element_Select('section');
         $section->setRequired(true);
         $section->addMultiOptions(array(
-            'hotel' => 'Hotel',
-            'city' => 'City',
-            'ad' => 'Ad'
+            'hotel' => 'HOTEL',
+            'city' => 'CITY',
+            'ad' => 'AD'
         ));
         
         /*

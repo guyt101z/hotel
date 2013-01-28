@@ -16,12 +16,12 @@
                             <table class="display data_table2" id="world" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Taxo ID</th>
-                                        <th>Name</th>
-                                        <th>Parent</th>
-                                        <th>Position</th>
-                                        <th>Section</th>
-                                        <th>Action</th>
+                                        <th>TAXO ID</th>
+                                        <th>NAME</th>
+                                        <th>PARENT</th>
+                                        <th>POSITION</th>
+                                        <th>SECTION</th>
+                                        <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,7 +31,7 @@
                                         <td><?php echo $row['name'] ?></td>
                                         <td><?php echo $row['parent'] ?></td>
                                         <td><?php echo $row['pos'] ?></td>
-                                        <td><?php echo $row['section'] ?></td>
+                                        <td><?php echo strtoupper($row['section']) ?></td>
                                         <td class="center">
                                             <span class="tip"><a href="/admin/taxonomies/edit/id/<?php echo $row['tid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
                                             <span class="tip"><a href="/admin/taxonomies/delete/id/<?php echo $row['tid'] ?>" class="delete" name="<?php echo $row['name'] ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		

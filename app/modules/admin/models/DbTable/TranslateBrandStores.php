@@ -3,7 +3,7 @@
 class Admin_Model_DbTable_TranslateBrandStores extends Zend_Db_Table_Abstract
 {
     
-        protected $_name = 'brand_store';
+        protected $_name = 'translate_brand_store';
         protected $_primary = 'bsid';
 
         public function getTableName()
@@ -21,7 +21,7 @@ class Admin_Model_DbTable_TranslateBrandStores extends Zend_Db_Table_Abstract
                 $sql .= " LEFT JOIN brand on brand_store.bid = brand.bid";
              * 
              */
-                $sql = "SELECT tbs1.*, bs1.bid, bs1.lat, bs1.lgt, bs1.wid, bs1.status 
+                $sql = "SELECT tbs1.*, bs1.bid, bs1.lat, bs1.lgt, bs1.wid, bs1.name, bs1.status 
                         FROM translate_brand_store AS tbs1 
                         LEFT JOIN brand_store AS bs1 ON tbs1.bsid = bs1.bsid";
                 return $this->_db->query($sql)->fetchAll();
@@ -39,6 +39,18 @@ class Admin_Model_DbTable_TranslateBrandStores extends Zend_Db_Table_Abstract
                    return $this->_db->query($sql)->fetchAll();
                 } 
                 return null;
+        }
+        
+        
+        public function addTranslateBrandStore($data = array()) 
+        {
+                return $this->insert($data);
+        }
+        
+        public function addTranslateBrandStoreSQL($data = array()) 
+        {
+                 $sql = "INSERT INTO `translate_brand_store` (`bsid`, `locale`, `title`, `content`) VALUES ('" . $data['bsid'] .  "', '" . $data['locale'] . "', '" . $data['title'] . "', '" . $data['content'] . "')";
+                 return $this->_db->query($sql);
         }
         
         public function addBrandStore($data = array()) 
@@ -63,12 +75,6 @@ class Admin_Model_DbTable_TranslateBrandStores extends Zend_Db_Table_Abstract
                     }
                 }
                 return null;
-        }
-        
-        public function addTranslateBrandStore($data = array()) 
-        {
-                 $sql = "INSERT INTO `translate_brand_store` (`bsid`, `locale`, `title`, `content`) VALUES ('" . $data['bsid'] .  "', '" . $data['locale'] . "', '" . $data['title'] . "', '" . $data['content'] . "')";
-                 return $this->_db->query($sql);
         }
         
         public function updateLanguage($id, $data = array()) 

@@ -1,16 +1,21 @@
 <div class="widget">
-        <div class="header"><span ><span class="ico gray window"></span>Brand Stores</span></div>
+        <div class="header"><span ><span class="ico gray window"></span>Articles</span></div>
         <div class="content">
                 <div id="UITab">
                         <ul class="tabs">
-                            <li><a href="/admin/brand-stores">Brand Stores</a></li>   
+                            <li><a href="/admin/articles">Articles</a></li>   
                             <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
                         </ul>
+                    <!--   
                         <form enctype="multipart/form-data" name="formBrandStore" id="formBrandStore" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
-                                
+                             
                                 <div class="section">
-                                        <label>Brand <small>required.</small></label>   
-                                        <div><?php echo $this->form->bid; ?></div>
+                                        <label>Article Type<small>required.</small></label>   
+                                        <div><?php echo $this->form->article_type; ?></div>
+                                </div>
+                                <div class="section">
+                                        <label>Title<small>required.</small></label>   
+                                        <div><?php echo $this->form->title; ?></div>
                                 </div>
 
                                 <div class="section">
@@ -24,8 +29,13 @@
                                 </div>
                             
                                 <div class="section">
-                                        <label>World <small>required.</small></label>   
-                                        <div><?php echo $this->form->wid; ?></div>
+                                        <label>Begin<small>required.</small></label>   
+                                        <div><?php echo $this->form->stime; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>End <small>required.</small></label>   
+                                        <div><?php echo $this->form->etime; ?></div>
                                 </div>
                             
                                 <div class="section">
@@ -33,26 +43,12 @@
                                         <div><?php echo $this->form->status; ?></div>
                                 </div>
                             
-                                <div class="section">
-                                        <label>Locale <small>required.</small></label>   
-                                        <div><?php echo $this->form->locale; ?></div>
-                                </div>
-                            
-                                <div class="section">
-                                        <label>Title <small>required.</small></label>   
-                                        <div><?php echo $this->form->title; ?></div>
-                                </div>
-                            
-                                <div class="section">
-                                        <label>Content <small>required.</small></label>   
-                                        <div><?php echo $this->form->content; ?></div>
-                                </div>
-
                                 <div class="section last">
-                                        <div><a class="uibutton submit_form" >Valider</a></div>
+                                        <div><a class="uibutton submit_form" >Submit</a></div>
                                 </div>
-
+                             
                         </form>
+                    -->
                 </div>
         </div>
 </div>

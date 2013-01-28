@@ -1,0 +1,92 @@
+<div class="widget" >
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Articles</span></div>
+    <div class="content">
+        <div id="UITab">
+            <ul class="tabs" >
+                <li class="active"><a href="#tab2">Brand Stores</a></li>            
+            </ul>
+            <div class="tab_container">
+                <div id="tab2" class="tab_content"> 
+                    <div class="load_page">
+                        <ul class="uibutton-group">
+                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a brand store">Add</a></li>
+                        </ul>
+                        <div class="tableName toolbar">
+                            <h3><?php echo $this->translate('list') ?></h3>
+                            <table class="display data_table2" id="languages" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Article Type</th>
+                                        <th>Title</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Begin</th>
+                                        <th>End</th>
+                                        <th>Created Date</th>
+                                        <th>Modified Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($this->articles as $row): ?>
+                                    <tr>
+                                        <td><?php echo $row['aid'] ?></td>
+                                        <td><?php echo $row['article_type'] ?></td>
+                                        <td><a href="/admin/articles/view/id/<?php echo $row['aid'] ?>"><?php echo $row['title'] ?></a></td>
+                                        <td><?php echo $row['lat'] ?></td>
+                                        <td><?php echo $row['lgt'] ?></td>
+                                        <td><?php echo $row['stime'] ?></td>
+                                        <td><?php echo $row['etime'] ?></td>
+                                        <td><?php echo $row['cdate'] ?></td>
+                                        <td><?php echo $row['mdate'] ?></td>
+                                        <td><?php echo $row['status'] ?></td>
+                                        <td class="center">
+                                            <span class="tip"><a href="/admin/articles/edit/id/<?php echo $row['aid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/articles/delete/id/<?php echo $row['aid'] ?>" class="delete" name="<?php echo $this->escape($row['title']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>   
+    </div>
+</div>
+
+<div class="dialog" style="display:none;">
+                <label>Locale</label>   
+                <input type="text" name="locale" id="locale" value="" />
+</div>
+
+<script type="text/javascript">
+$(function(){
+    $('.add_locale').click(function(event) {
+        /*
+        event.preventDefault();
+        var bsid = $(this).attr('id').substring(19);
+        $('.dialog').dialog({
+            height: 200,
+            width: 350,
+            title: 'ADD A NEW LOCALE'
+            buttons: {
+                "Submit": function() {
+                    
+                }, 
+                "Cancel": function() {
+                    $(this).dialog("close");
+                }
+            },
+            close: function() {
+                $('#locale').val('');
+            }
+        });
+        */
+    });
+});
+</script>

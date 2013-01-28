@@ -22,8 +22,7 @@ class Admin_TranslateTaxonomiesController extends Zend_Controller_Action
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        //$this->table->addWorldSingleLocale($data);
-                        $this->table->addWorldSQL($data);
+                        $this->table->addTranslateTaxonomy($data);
                         $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
@@ -36,19 +35,19 @@ class Admin_TranslateTaxonomiesController extends Zend_Controller_Action
         {
             $form = $this->_getForm();
             
-            $id = $this->_request->getParam('wid');
+            $id = $this->_request->getParam('id');
             
             if ($id) {
                 if ($this->_request->isPost()) {
                     $data = $this->_request->getPost();
                     if ($form->isValid($data)) {
-                        $this->table->updateWorldSQL($id, $data);
-                        $this->_redirect('/admin/world');
+                        $this->table->updateTranslateTaxonomy($id, $data);
+                        $this->_redirect('/admin/translate-taxonomies');
                     }
                 } else {
-                    $data = $this->table->getWorld($id);
-                    $form->populate($data[0]); 
-                    $this->view->data = $data[0];
+                    $data = $this->table->getTranslateTaxonomy($id);
+                    $form->populate($data); 
+                    $this->view->data = $data;
                 }
             } else {
                 throw new Exception ('URL is not valid');
@@ -67,32 +66,6 @@ class Admin_TranslateTaxonomiesController extends Zend_Controller_Action
                 $this->_redirect('/admin/world');
         }
         
-        public function addLocaleAction()
-        {
-                $form = $this->_getForm();
-                
-                if ($this->_request->isPost()) {
-                    $data = $this->_request->getPost();
-                    if ($form->isValid($data)) {
-                        if ($this->table->addTranslateWorld($data)) {
-                            $this->_redirect('/admin/world');
-                        } else {
-                            $this->_helper->getHelper('FlashMessenger')->addMessage('errors ocurred while adding a new locale. ');  
-                        }
-                        $this->_redirect('/admin/world');
-                    }
-                    
-                } else { 
-                    $tr_wid = $this->_request->getParam('id');
-                    if ($tr_wid) {
-                        $data= $this->table->getTranslateWorldById($tr_wid);
-                        $form->populate($data);
-                    }
-                }
-                
-                $this->render('trw-form');
-        }
-        
         public function viewAction() 
         {
             $id = $this->_request->getParam('id');
@@ -102,20 +75,6 @@ class Admin_TranslateTaxonomiesController extends Zend_Controller_Action
             $this->view->focusRowArray = $this->table->getWorldRightJoinTranslateWorld($id);
         }
     
-
-        
-        public function ajaxGetLocaleByWid() 
-        {
-                $this->_helper->getHelper('layout')->disableLayout();
-                $this->_helper->viewRenderer->setNoRender();
-
-                $wid = $this->getRequest()->getParam('id');
-                if ($wid) {
-                        $title = $this->table->getLocaleByWid($wid);
-                        echo json_encode($title);
-                }
-                echo '0';
-        }
     
         private function _getForm() 
         {

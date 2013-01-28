@@ -21,6 +21,12 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
+        public function getBrandStoreNames() 
+        {
+                $sql = "SELECT bsid, name FROM brand_store";
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
         public function getBrandStore($id) 
         {
                 return $this->fetchRow('bsid = ' . $id)->toArray();
@@ -43,7 +49,7 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
              * 
              */
         }
-        
+        /*
         public function getTranslateBrandStore($data) 
         {
                 if ($data) {
@@ -57,7 +63,7 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
                 } 
                 return null;
         }
-        
+        */
         public function addBrandStore($data = array()) 
         {
                 $bsid = $this->insert(array(
