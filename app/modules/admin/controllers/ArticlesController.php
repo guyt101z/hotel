@@ -22,7 +22,17 @@ class Admin_ArticlesController extends Zend_Controller_Action
                     $data = $this->_request->getPost();
                     $data['cdate'] = new Zend_Db_Expr('NOW()');
                     if ($form->isValid($data)) {
-                        $this->table->addArticle($data);
+                        $data2= array();
+                        $data2['hid'] = $data['hid'];
+                        $data2['tid'] = $data['tid'];
+                        unset($data['hid']);
+                        unset($data['tid']);
+                        $aid = $this->table->addArticle($data);
+                        if ($aid) {
+                            $data2['aid'] = $aid;
+                            $hotel_article_taxo_table = new Admin_Model_DbTable_HotelArticleTaxo();
+                            $hotel_article_taxo_table->addHotelArticleTaxo($data2);
+                        }
                         $this->_helper->redirector('index');
                     } else {
                         $form->populate($data);
@@ -58,6 +68,9 @@ class Admin_ArticlesController extends Zend_Controller_Action
         {
                 $id = $this->getRequest()->getParam('id');
                 $this->view->article = $this->table->getArticle($id);
+                $this->view->translate_article = $this->table->getTranslateArticle($id);
+                // will change to full join later.
+                //$this->view->article = $this->table->getArticlesFullJoinTranslateArticles($id);
         }
 
         public function deleteAction() 

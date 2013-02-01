@@ -9,33 +9,12 @@
                     
                         <form>
                                 <div class="section">
-                                        <label>Title<small>required.</small></label>   
-                                        <div><?php echo $this->article['title']; ?></div>
-                                </div>
-                            
-                                <?php if ($this->translate_article) { ?>
-                                    <div style="margin: 20px 50px;" >
-                                    <?php foreach($this->translate_article as $tr_article) { ?>
-                                        <h3>Translate title to </h3>
-                                        <div class="section">
-                                                <label>Locale <small>required.</small></label>   
-                                                <div><?php echo $tr_article['locale']; ?></div>
-                                        </div>
-                                        <div class="section">
-                                                <label>Title <small>required.</small></label>   
-                                                <div><?php echo $tr_article['title']; ?></div>
-                                        </div>
-                                        <div class="section">
-                                                <label>Content <small>required.</small></label>   
-                                                <div><?php echo $tr_article['content']; ?></div>
-                                        </div>
-                                    <?php } ?>
-                                    </div>
-                                <?php } ?>
-                            
-                                <div class="section">
                                         <label>Article Type<small>required.</small></label>   
                                         <div><?php echo $this->article['article_type']; ?></div>
+                                </div>
+                                <div class="section">
+                                        <label>Title<small>required.</small></label>   
+                                        <div><?php echo $this->article['title']; ?></div>
                                 </div>
 
                                 <div class="section">
@@ -53,7 +32,6 @@
                                         <div><?php echo $this->article['stime']; ?></div>
                                 </div>
                             
-                            
                                 <div class="section">
                                         <label>End <small>required.</small></label>   
                                         <div><?php echo $this->article['etime']; ?></div>
@@ -64,6 +42,22 @@
                                         <div><?php echo $this->article['status']; ?></div>
                                 </div>
                             
+                                <?php if ($this->translate_article) { ?>
+                                    <?php foreach($this->translate_article as $tr_article) { ?>
+                                        <div class="section">
+                                                <label>Locale <small>required.</small></label>   
+                                                <div><?php echo $tr_article['locale']; ?></div>
+                                        </div>
+                                        <div class="section">
+                                                <label>Title <small>required.</small></label>   
+                                                <div><?php echo $tr_article['title']; ?></div>
+                                        </div>
+                                        <div class="section">
+                                                <label>Content <small>required.</small></label>   
+                                                <div><?php echo $tr_article['content']; ?></div>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
                         </form>
                     
                 </div>

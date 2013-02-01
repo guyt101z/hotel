@@ -17,6 +17,12 @@ class Admin_Model_DbTable_Hotels extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
+        public function getHotelNames()
+        {
+                $sql = "SELECT hid, name FROM hotel";
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
         public function getTranslateHotels($data = null)
         {
                 if ($data && is_numeric($data)) {

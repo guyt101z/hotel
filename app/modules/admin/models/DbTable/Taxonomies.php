@@ -25,7 +25,7 @@ class Admin_Model_DbTable_Taxonomies extends Zend_Db_Table_Abstract
         
         public function getTaxonomyNames() 
         {
-                $sql = "SELECT * FROM taxo";
+                $sql = "SELECT tid, name FROM taxo";
                 return $this->_db->query($sql)->fetchAll();
         }
 

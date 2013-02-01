@@ -207,6 +207,7 @@ $(function() {
 
 	//datetimepicker
    $("#datetimepicker").datetimepicker({dateFormat: 'yy-mm-dd', timeFormat: 'hh:mm:ss'});
+   $("#datetimepicker2").datetimepicker({dateFormat: 'yy-mm-dd', timeFormat: 'hh:mm:ss'});
    $('#timepicker').timepicker({dateFormat: 'yy-mm-dd'});
    
    	//Color picker 

@@ -8,15 +8,13 @@
                         </ul>
                         <form enctype="multipart/form-data" name="formBrandStore" id="formBrandStore" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
                                 
-                                
-                                <div class="section">
-                                        <label>Title<small>required.</small></label>   
-                                        <div><?php echo $this->form->title; ?></div>
-                                </div>
-                            
                                 <div class="section">
                                         <label>Article Type<small>required.</small></label>   
                                         <div><?php echo $this->form->article_type; ?></div>
+                                </div>
+                                <div class="section">
+                                        <label>Title<small>required.</small></label>   
+                                        <div><?php echo $this->form->title; ?></div>
                                 </div>
 
                                 <div class="section">
@@ -42,6 +40,16 @@
                                 <div class="section">
                                         <label>Status <small>required.</small></label>   
                                         <div><?php echo $this->form->status; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>Hotel <small>.</small></label>   
+                                        <div><?php echo $this->form->hid; ?></div>
+                                </div>
+                            
+                                <div class="section">
+                                        <label>Taxo <small>.</small></label>   
+                                        <div><?php echo $this->form->tid; ?></div>
                                 </div>
                             
                                 <div class="section last">
