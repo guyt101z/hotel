@@ -9,8 +9,14 @@ class Admin_Form_TranslateWorld extends Zend_Form
         $wid = new Zend_Form_Element_Text('wid');
         $wid->setRequired(true);
         
-        $locale = new Zend_Form_Element_Text('locale');
-        $locale->setRequired(true);
+        $locale = new Zend_Form_Element_Select('locale');
+        $lang_table = new Admin_Model_DbTable_Languages();
+        $languages = $lang_table->getLanguages();
+        if ($languages) {
+                foreach ($languages as $l) {
+                        $locale->addMultiOption($l['locale'], $l['locale']);
+                }
+        }
 
         $title = new Zend_Form_Element_Text('title');
         

@@ -32,38 +32,43 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
                 return $this->fetchRow('bsid = ' . $id)->toArray();
         }
         
+        public function getBrandStoreLeftJoinTranslateBrandStore($id)
+        {
+                if ($id && is_numeric($id)) {
+                    $sql = "SELECT bs1.*, tr_bs1.tr_bsid, tr_bs1.locale, tr_bs1.title, tr_bs1.content, w1.name AS world_name, b1.title as brand_name, b1.status as brand_status 
+                            FROM brand_store AS bs1 
+                            LEFT JOIN translate_brand_store AS tr_bs1 on bs1.bsid = tr_bs1.bsid
+                            LEFT JOIN world as w1 on bs1.wid = w1.wid
+                            LEFT JOIN brand AS b1 on bs1.bid = b1.bid
+                            WHERE bs1.bsid = $id";
+                } else {
+                    $sql = "SELECT bs1.*, tr_bs1.tr_bsid, tr_bs1.locale, tr_bs1.title, tr_bs1.content, w1.name AS world_name, b1.title as brand_name, b1.status as brand_status 
+                            FROM brand_store AS bs1 
+                            LEFT JOIN translate_brand_store AS tr_bs1 on bs1.bsid = tr_bs1.bsid
+                            LEFT JOIN world as w1 on bs1.wid = w1.wid";
+                }
+                return $this->_db->query($sql)->fetchAll();
+        }
+        
+        public function getTrBrandStore($id) 
+        {
+                $sql = "select tr_bs1.*, bs1.name as brand_store_name 
+                        from translate_brand_store  as tr_bs1 left join brand_store as bs1 on tr_bs1.bsid = bs1.bsid
+                        where tr_bsid = $id";
+                return $this->_db->query($sql)->fetch();
+        }
+        
         public function updateBrandStore($id, $data = array())
         {
                 return $this->update($data, 'bsid = ' . $id);
         }
         
-        // =============================
-        public function getBrandStoresOlddddddd()
+        public function updateTrBrandStore($id, $data=array()) 
         {
-            /*
-                $sql = "SELECT translate_brand_store.*, brand_store.*, translate_world.title AS world, brand.title AS brand FROM brand_store ";
-                $sql .= " LEFT JOIN translate_brand_store ON brand_store.bsid = translate_brand_store.bsid";
-                $sql .= " LEFT join translate_world ON brand_store.wid = translate_world.wid ";
-                $sql .= " AND translate_brand_store.locale = translate_world.locale";
-                $sql .= " LEFT JOIN brand on brand_store.bid = brand.bid";
-             * 
-             */
+                $sql = "UPDATE `translate_brand_store` SET `locale`='".$data['locale']."', `title`='" . $data['title']. "', `content`='". $data['content']."' WHERE `tr_bsid`='$id'";
+                return $this->_db->query($sql);
         }
-        /*
-        public function getTranslateBrandStore($data) 
-        {
-                if ($data) {
-                    $sql = "SELECT * FROM translate_brand_store LEFT JOIN brand_store ON translate_brand_store.bsid = brand_store.bsid ";
-                    if (is_numeric($data)) {
-                        $sql .= " WHERE tr_bsid = '$data'";
-                    } else {
-                        $sql .= " WHERE `translate_brand_store`.`bsid` = '" . $data['bsid'] . "' AND `locale` = '" . $data['locale'] . "' AND `title` = '" . $data['title'] . "'";
-                   }
-                   return $this->_db->query($sql)->fetchAll();
-                } 
-                return null;
-        }
-        */
+        
         public function addBrandStore($data = array()) 
         {
                 $bsid = $this->insert(array(

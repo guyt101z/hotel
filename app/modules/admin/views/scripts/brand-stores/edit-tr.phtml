@@ -1,0 +1,24 @@
+<div class="widget">
+        <div class="header"><span ><span class="ico gray window"></span>Brand Stores</span></div>
+        <div class="content">
+
+             <div id="UITab">
+                        <ul class="tabs">
+                            <li><a href="/admin/brand-stores">Brand Stores</a></li>   
+                            <li><a href="/admin/brand-stores/view/id/<?php echo $this->data['bsid'] ?>"><?php echo $this->data['brand_store_name'] ?></a></li>
+                            <li class="active"><a href="#">Edit</a></li>          
+                        </ul>
+                        <div id="diagTrBrandStore">
+                            <form enctype="multipart/form-data" id="formTrBrandStore" action="/admin/brand-stores/edit-tr/id/<?php echo $this->data['tr_bsid'] ?>" method="<?php echo $this->form->getMethod(); ?>">
+                                <?php echo $this->form->bsid ?>
+                                <div class="section"><label>Locale</label><div><?php echo $this->form->locale ?></div></div>
+                                <div class="section"><label>Title</label><div><?php echo $this->form->title ?></div></div>
+                                <div class="section"><label>Content</label><div><?php echo $this->form->content ?></div></div>
+                                <div class="section last">
+                                        <div><a class="uibutton submit_form" >Submit</a></div>
+                                </div>
+                            </form>
+                        </div>
+             </div>
+        </div>
+</div>

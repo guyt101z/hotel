@@ -31,30 +31,6 @@ class Admin_BrandStoresController extends Zend_Controller_Action
                 $this->render('form');
         }
         
-        public function addLocaleAction() 
-        {
-                $form = $this->_getForm();
-                $tr_bsid = $this->_request->getParam('tr_bsid');
-                
-                
-                if ($this->_request->isPost()) {
-                    $data = $this->_request->getPost();
-                    if ($form->isValid($data)) {
-                        if ($this->table->addTranslateBrandStore($data)) {
-                            $this->_helper->redirector('index');
-                        } else {
-                            throw new Zend_Exception('Error occured while adding a new locale');
-                        }
-                    }
-                    
-                } else {
-                    $data = $this->table->getTranslateBrandStore($tr_bsid);
-                    $form->populate($data);
-                }
-                
-        }
-
-
         public function editAction() 
         {
                 $form = $this->_getForm();
@@ -76,6 +52,44 @@ class Admin_BrandStoresController extends Zend_Controller_Action
                 
                 $this->render('form');
         }
+        
+        public function editTrAction()
+        {
+                $form = new Admin_Form_TranslateBrandStore(array(
+                    'method' => 'post'
+                ));
+                $id = $this->_request->getParam('id');
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->updateTrBrandStore($id, $data)) {
+                            $this->_redirect('/admin/brand-stores/view/id/' . $data['bsid']);
+                        } else {
+                            throw new Zend_Exception('Error occured');
+                        }
+                    }
+                } else {
+                    $data = $this->table->getTrBrandStore($id);
+                    $form->populate($data);
+                    $this->view->data = $data;
+                }
+                $this->view->form = $form;
+        }
+        
+        public function viewAction() 
+        {
+            $id = $this->_request->getParam('id');
+
+            if ($id) {
+                $this->view->tr_bs_form = new Admin_Form_TranslateBrandStore(array(
+                    'method' => 'post'
+                ));
+                $focusRowArray = $this->table->getBrandStoreLeftJoinTranslateBrandStore($id);
+                $this->view->focusRowArray = $focusRowArray;
+                $this->view->id = $id;
+            }
+        }
 
         public function deleteAction() 
         {
@@ -96,6 +110,31 @@ class Admin_BrandStoresController extends Zend_Controller_Action
 
                 $this->view->form = $form;
                 return $form;
+        }
+        
+        
+        // unused actions
+           public function addLocaleAction() 
+        {
+                $form = $this->_getForm();
+                $tr_bsid = $this->_request->getParam('tr_bsid');
+                
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->addTranslateBrandStore($data)) {
+                            $this->_helper->redirector('index');
+                        } else {
+                            throw new Zend_Exception('Error occured while adding a new locale');
+                        }
+                    }
+                    
+                } else {
+                    $data = $this->table->getTranslateBrandStore($tr_bsid);
+                    $form->populate($data);
+                }
+                
         }
 }
 

@@ -31,6 +31,24 @@ class Admin_TranslateWorldController extends Zend_Controller_Action
                 }
         }
         
+        public function ajaxAddTrWorldAction()
+        {
+                $this->_helper->getHelper('layout')->disableLayout();
+		$this->_helper->viewRenderer->setNoRender();
+                $wid = $this->_request->getParam('wid', false);
+		$locale = $this->_request->getParam('locale', false);
+		$title = $this->_request->getParam('title', false);
+                
+                if($wid && $locale && $title) {
+                        if ($this->table->addTranslateWorld($wid, $locale, $title)) {
+                            $this->_helper->json(array('success' => $wid));
+                            exit;
+                        }
+		}
+		
+		$this->_helper->json(array('error' => 500));
+        }
+        
         
         public function editAction() 
         {

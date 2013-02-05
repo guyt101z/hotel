@@ -7,15 +7,15 @@ class Admin_Form_TranslateBrandStore extends Zend_Form
         {
                 $tr_bsid = new Zend_Form_Element_Hidden('tr_bsid');
 
-                $bsid = new Zend_Form_Element_Select('bsid');
-                $brand_store_table = new Admin_Model_DbTable_BrandStores();
+                $bsid = new Zend_Form_Element_Hidden('bsid');
+              /*  $brand_store_table = new Admin_Model_DbTable_BrandStores();
                 $brand_stores = $brand_store_table->getBrandStoreNames();
                 if ($brand_stores) {
                     foreach($brand_stores as $b) {
                         $bsid->addMultiOption($b['bsid'], $b['name']);
                     }
                 }
-
+*/
                 $locale = new Zend_Form_Element_Select('locale');
                 $locale_table = new Admin_Model_DbTable_Languages();
                 $languages = $locale_table->getLanguages();
@@ -26,8 +26,10 @@ class Admin_Form_TranslateBrandStore extends Zend_Form
                 }
 
                 $title = new Zend_Form_Element_Text('title');
+                $title->setAttribs(array('class' => 'full'));
 
                 $content = new Zend_Form_Element_Textarea('content');
+                $content->setAttribs(array( 'id' => 'editor'));
 
                 $this->addElements(array($tr_bsid, $bsid, $locale, $title, $content));
 

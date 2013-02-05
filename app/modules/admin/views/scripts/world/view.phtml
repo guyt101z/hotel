@@ -1,43 +1,46 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span><?php echo $this->translate('world') ?></span></div>
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>World</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs">
                 <li><a href="<?php echo $this->url(array('controller'=>'world', 'action' => 'index', 'module' => 'admin'), 'default', true) ?>"><?php echo $this->translate('world') ?></a></li> 
-                <li class="active"><a href="#tab2"><?php echo $this->id ?></a></li>
+                <li class="active"><a href="#tab2"><?php echo $this->focusRowArray[0]['name'] ?></a></li>
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
-                        <!--
-                        <ul class="uibutton-group">
-                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title=""><?php echo $this->translate('') ?></a></li>
-                        </ul>
-                        -->
-                        <div class="tableName toolbar">
-                            <h3><?php echo $this->translate('list') ?></h3>
-                            <table class="display data_table2" id="world" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th><?php echo $this->translate('Title') ?></th>
-                                        <th><?php echo $this->translate('Locale') ?></th>
-                                       <!-- <th><?php echo $this->translate('Action') ?></th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach($this->focusRowArray as $row): ?>
-                                    <tr>
-                                        <td><a href="<?php echo $this->url(array('action'=>'view', 'id'=>$row['wid'])) ?>"><?php echo ucwords($row['title']);?></a></td>
-                                        <td><?php echo $row['locale'] ?></td>
-                                    <!--    <td class="center">
-                                            <span class="tip"><a href="<?php echo $this->url(array('action' => 'edit', 'wid' => $row->wid), 'default'); ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="<?php echo $this->url(array('action' => 'delete', 'wid' => $row->wid), 'default'); ?>" class="delete" name="<?php echo $this->escape($row->title) ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>						        			
-                                      </td> --> 
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <form>
+                            <div class="section">
+                                    <label>Name</label>   
+                                    <div><?php echo $this->focusRowArray[0]['name']; ?><span id ="btnAddALocale" class="uibutton icon add" style="float:right; margin-bottom: 0px; margin-top: -10px;" >Add a translation</span></div>
+                            </div>
+                                <?php if ($this->focusRowArray[0]['tr_wid']) { ?>
+                                <div style="margin: 20px 50px;" >
+                                <?php foreach ($this->focusRowArray as $row) { ?>
+                                    <div class="section">
+                                        <label><small><?php echo $row['locale']; ?></small></label> 
+                                        <div><?php echo $row['title']; ?></div>
+                                    </div>
+                                <?php } ?>
+                                </div>
+                                <?php } ?>
+                            
+                            <div class="section">
+                                    <label>Parent Name</label>   
+                                    <div><?php echo $this->focusRowArray[0]['parent_name']; ?></div>
+                            </div>
+
+                            <div class="section">
+                                    <label>Latitude</label>   
+                                    <div><?php echo $this->focusRowArray[0]['lat']; ?></div>
+                            </div>
+
+                            <div class="section last">
+                                    <label>Longitude</label>   
+                                    <div><?php echo $this->focusRowArray[0]['lgt']; ?></div>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
@@ -46,8 +49,42 @@
     </div>
 </div>
 
+<div id="diagAddWorldLocale" style="display:none;">
+    <form id="formTrWorld">
+        <div class="section"><label>Locale</label><div><?php echo $this->tr_world_form->locale ?></div></div>
+        <div class="section last"><label>Title</label><div><?php echo $this->tr_world_form->title ?></div></div>
+    </form>
+</div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('ul.tabs li:first-child').removeClass('active');
+$(document).ready(function(){
+    $('#btnAddALocale').click(function(){
+        $('#diagAddWorldLocale').dialog({
+            title: "ADD A NEW TRANSLATION",
+            width: 300,
+            height: 250,
+            modal: true,
+            resizable: false,
+            buttons: {
+                'Add': function() {
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: '/admin/translate-world/ajax-add-tr-world/',
+                            data: {
+                                wid: '<?php echo $this->focusRowArray[0]['wid'] ?>',
+                                locale: $('#locale').val(),
+                                title: $('#title').val()
+                            },
+                            success: function(res) {
+                                location.reload();
+                            }
+                        });
+                },
+                'Cancel': function() {
+                    $(this).dialog('close');
+                }
+            }
+        });
     });
+});
 </script>

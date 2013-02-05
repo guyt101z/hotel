@@ -9,14 +9,13 @@
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
                         <ul class="uibutton-group">
-                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a language">Add</a></li>
+                            <li id="btnAddLang"><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a language">Add</a></li>
                         </ul>
                         <div class="tableName toolbar">
                             <h3><?php echo $this->translate('list') ?></h3>
                             <table class="display data_table2" id="languages" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Language ID</th>
                                         <th>Locale</th>
                                         <th>Title</th>
                                         <th>Action</th>
@@ -25,7 +24,6 @@
                                 <tbody>
                                     <?php foreach($this->languages as $language): ?>
                                     <tr>
-                                        <td><?php echo $language['lid'] ?></td>
                                         <td><?php echo $language['locale']?></td>
                                         <td><?php echo $language['title'] ?></td>
                                         <td class="center">
@@ -44,3 +42,73 @@
         <div class="clear"></div>   
     </div>
 </div>
+
+<div id="diagAddLang" style="display:none;">
+    
+</div>
+<script type="text/javascript"> 
+$(document).ready(function() {
+    $('#diagAddLang').html({
+        //'<form><input type="text" name="locale></form>'
+    });
+    $('#btnAddLang_').live('click', function(event) {
+        event.preventDefault();
+        $('#diagAddLang').dialog({
+            title: "Add a New Language",
+            width: 400,
+            height: 300,
+            draggable: false,
+            modal: true,
+            resizable: false,
+            buttons: {
+                'Add': function() {
+                    
+                },
+                'Cancel': function() {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    });
+});
+            /*
+            $.confirm({
+                'title': 'ADD A NEW LANGUAGE',
+                'message': " <strong>YOU WANT TO DELETE </strong><br /><font color=red>' " + name + " ' </font> ",
+			'buttons': { 
+				'Yes': {
+					'class': 'special',
+					'action': function() {
+						window.location = href;
+					}
+				},
+				'No' : {
+					'class'	: '',
+					'action': function() {
+					}
+				}
+			}
+               
+           
+	});
+            /* Init DataTables */
+           // var oTable = $('#example').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            /*
+            $('td', oTable.fnGetNodes()).editable( '../examples_support/editable_ajax.php', {
+                    "callback": function( sValue, y ) {
+                            var aPos = oTable.fnGetPosition( this );
+                            oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+                    },
+                    "submitdata": function ( value, settings ) {
+                            return {
+                                    "row_id": this.parentNode.getAttribute('id'),
+                                    "column": oTable.fnGetPosition( this )[2]
+                            };
+                    },
+                    "height": "14px"
+            });
+            */
+
+</script>

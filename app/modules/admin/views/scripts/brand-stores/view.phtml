@@ -1,0 +1,157 @@
+<div class="widget" >
+    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>World</span></div>
+    <div class="content">
+        <div id="UITab">
+            <ul class="tabs">
+                <li><a href="<?php echo $this->url(array('controller'=>'world', 'action' => 'index', 'module' => 'admin'), 'default', true) ?>"><?php echo $this->translate('world') ?></a></li> 
+                <li class="active"><a href="#tab2"><?php echo $this->focusRowArray[0]['name'] ?></a></li>
+            </ul>
+            <div class="tab_container">
+                <div id="tab2" class="tab_content"> 
+                    <div class="load_page">
+                        <form>
+                            
+                            <div class="section">
+                                <label>Name</label>   
+                                <div><?php echo $this->focusRowArray[0]['name']; ?><span id ="btnAddALocale" class="uibutton icon add" style="float:right; margin-bottom: 0px; margin-top: -10px;" >Add new translation</span></div>
+                            </div>
+                            
+                                <?php if ($this->focusRowArray[0]['tr_bsid']) { ?>
+                                <div style="margin: 20px 0px 20px 50px;" >
+                                <?php foreach ($this->focusRowArray as $row) { ?>
+                                    <div class="section">
+                                        <label><small><?php echo $row['locale']; ?></small></label> 
+                                        <div><?php echo $row['title']; ?><span class="btnEditTrBrandStore tip" id="edit_tr_bsid_<?php echo $row['tr_bsid'] ?>" style="float:right; " ><a href="/admin/brand-stores/edit-tr/id/<?php echo $row['tr_bsid'] ?>"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span></div>
+                                        <?php if ($row['content']) { ?> <div style="margin-top: 10px;" class="content_tr_bsid_<?php echo $row['tr_bsid'] ?>"><?php echo $row['content']; ?></div> <?php } ?>
+                                    </div>
+                                <?php } ?>
+                                </div>
+                                <?php } ?>
+                            
+                            <div class="section">
+                                <label>Brand</label>   
+                                <div><?php echo $this->focusRowArray[0]['brand_name']; ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                    <label>Brand Status</label>   
+                                    <div><?php echo $this->focusRowArray[0]['brand_status']; ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                <label>World</label>   
+                                <div><?php echo $this->focusRowArray[0]['world_name']; ?></div>    
+                            </div>
+                            
+                            <div class="section">
+                                    <label>Latitude</label>   
+                                    <div><?php echo $this->focusRowArray[0]['lat']; ?></div>
+                            </div>
+
+                            <div class="section">
+                                    <label>Longitude</label>   
+                                    <div><?php echo $this->focusRowArray[0]['lgt']; ?></div>
+                            </div>
+                            
+                            <div class="section last">
+                                    <label>Status</label>   
+                                    <div><?php echo $this->focusRowArray[0]['status']; ?></div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>   
+    </div>
+</div>
+
+<div id="diagTrBrandStore" style="display:none;">
+    <form id="formTrBrandStore">
+        <div class="section"><label>Locale</label><div><?php echo $this->tr_bs_form->locale ?></div></div>
+        <div class="section"><label>Title</label><div><?php echo $this->tr_bs_form->title ?></div></div>
+        <div class="section last"><label>Content</label><div><?php echo $this->tr_bs_form->content ?></div></div>
+    </form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    javascript:void('Source');
+    $('#btnAddALocale').click(function(){
+       // CKEDITOR.config.startupMode = 'wysiwyg';
+       
+       /*
+        $('#diagTrBrandStore').dialog({
+            title: "ADD A NEW TRANSLATION",
+            width: 710,
+            height: 610,
+            modal: true,
+            resizable: false,
+            buttons: {
+                'Add': function() {
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: '/admin/translate-brand-store/ajax-add-tr-brand-store/',
+                            data: {
+                                bsid: '<?php echo $this->focusRowArray[0]['bsid'] ?>',
+                                locale: $('#locale').val(),
+                                title: $('#title').val(),
+                                content: $('#content').val()
+                            },
+                            success: function(res) {
+                                location.reload();
+                            }
+                        });
+                },
+                'Cancel': function() {
+                    $(this).dialog('close');
+                }
+            }
+        });
+        */
+    });
+    
+    $('.btnEditTrBrandStore1').click(function(){
+        var tr_bsid = ($(this).attr('id').split('_'))['3'];
+        var content = $('.content_tr_bsid_' + tr_bsid).html();
+        
+        //$('#content').val(content);
+       
+        $('#diagTrBrandStore').dialog({
+            title: 'EDIT "'+ $('#title').val() +'"',
+            width: 710,
+            height: 610,
+            modal: true,
+            resizable: false,
+            buttons: {
+                'Add': function() {
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: '/admin/translate-brand-store/ajax-add-tr-brand-store/',
+                            data: {
+                                bsid: '<?php echo $this->focusRowArray[0]['bsid'] ?>',
+                                locale: $('#locale').val(),
+                                title: $('#title').val(),
+                                content: $('#content').val()
+                            },
+                            success: function(res) {
+                                location.reload();
+                            }
+                        });
+                },
+                'Cancel': function() {
+                    $(this).dialog('close');
+                }
+            }
+        });
+       
+        //$('#content').ckeditor({});
+        
+        
+        
+    });
+});
+</script>

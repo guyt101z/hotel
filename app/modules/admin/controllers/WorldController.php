@@ -33,28 +33,41 @@ class Admin_WorldController extends Zend_Controller_Action
         
         public function editAction() 
         {
-            $form = $this->_getForm();
-            
-            $id = $this->_request->getParam('wid');
-            
-            if ($id) {
-                if ($this->_request->isPost()) {
-                    $data = $this->_request->getPost();
-                    if ($form->isValid($data)) {
-                        $this->table->updateWorldSQL($id, $data);
-                        $this->_redirect('/admin/world');
+                $form = $this->_getForm();
+
+                $id = $this->_request->getParam('wid');
+
+                if ($id) {
+                    if ($this->_request->isPost()) {
+                        $data = $this->_request->getPost();
+                        if ($form->isValid($data)) {
+                            $this->table->updateWorldSQL($id, $data);
+                            $this->_redirect('/admin/world');
+                        }
+                    } else {
+                        $data = $this->table->getWorld($id);
+                        $form->populate($data[0]); 
+                        $this->view->data = $data[0];
                     }
                 } else {
-                    $data = $this->table->getWorld($id);
-                    $form->populate($data[0]); 
-                    $this->view->data = $data[0];
+                    throw new Exception ('URL is not valid');
                 }
-            } else {
-                throw new Exception ('URL is not valid');
-            }
             
         }
         
+        public function viewAction() 
+        {
+            $id = $this->_request->getParam('id');
+
+            if ($id) {
+                $this->view->tr_world_form = new Admin_Form_TranslateWorld(array(
+                    'method' => 'post'
+                ));
+                $focusRowArray = $this->table->getWorldLeftJoinTranslateWorld($id);
+                $this->view->focusRowArray = $focusRowArray;
+                $this->view->id = $id;
+            }
+        }
         
         public function deleteAction()
         {
@@ -92,14 +105,7 @@ class Admin_WorldController extends Zend_Controller_Action
                 $this->render('trw-form');
         }
         
-        public function viewAction() 
-        {
-            $id = $this->_request->getParam('id');
-
-            $this->view->id = $id;
-
-            $this->view->focusRowArray = $this->table->getWorldRightJoinTranslateWorld($id);
-        }
+        
     
         private function _getForm() 
         {

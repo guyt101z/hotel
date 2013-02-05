@@ -34,7 +34,7 @@ class Admin_Model_DbTable_TranslateBrandStores extends Zend_Db_Table_Abstract
                     if (is_numeric($data)) {
                         $sql .= " WHERE tr_bsid = '$data'";
                     } else {
-                        $sql .= " WHERE `translate_brand_store`.`bsid` = '" . $data['bsid'] . "' AND `locale` = '" . $data['locale'] . "' AND `title` = '" . $data['title'] . "'";
+                        $sql .= " WHERE `bsid` = '" . $data['bsid'] . "' AND `locale` = '" . $data['locale'] . "' AND `title` = '" . $data['title'] . "'";
                    }
                    return $this->_db->query($sql)->fetchAll();
                 } 

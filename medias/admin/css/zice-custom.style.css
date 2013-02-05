@@ -1,0 +1,16 @@
+
+form#formTrBrandStore div.section {
+    border-bottom: none;
+}
+
+form#formTrBrandStore div.section > label {
+    width: 8%;
+}
+
+form#formTrBrandStore div.section > div {
+    margin-left: 12%;
+}
+
+#formTaxonomy #content, #formBrandStore #content, #formTrBrandStore #content {
+    padding: 0px 7px 0px 7px;
+}

@@ -20,13 +20,17 @@ class Admin_Model_DbTable_TranslateWorld extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
     
-        public function addLocale($tr_wid, $locale) 
+        public function addTranslateWorld($wid, $locale, $title) 
         {
-                $sql = "SELECT * FROM translate_world WHERE tr_wid = " . $tr_wid;
-                $trw = $this->_db->query($sql)->fetch();
-                die(print_r($trw));
-                return;
-                //$sql = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES (``, ``, ``)";
+            
+                $sql_select = "SELECT * FROM translate_world WHERE wid = '$wid' AND locale = '$locale' AND title = '$title'";
+                
+                if ($this->_db->query($sql_select)->fetch()) {
+                    return null;
+                }
+                
+                $sql = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES ('$wid', '$locale', '$title')";
+                return $this->_db->query($sql);
         }
         
         public function deleteTranslateWorldSQL($tr_wid)

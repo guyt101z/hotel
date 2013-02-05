@@ -16,11 +16,8 @@
                             <table class="display data_table2" id="languages" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Store Name</th>
                                         <th>Brand</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
                                         <th>World</th>
                                         <th>Store Status</th>
                                         <th>Brand Status</th>
@@ -30,11 +27,8 @@
                                 <tbody>
                                     <?php foreach($this->stores as $store): ?>
                                     <tr>
-                                        <td><?php echo $store['bsid'] ?></td>
-                                        <td><?php echo $store['name'] ?></td>
+                                        <td><a href="/admin/brand-stores/view/id/<?php echo $store['bsid'] ?>"><?php echo $store['name'] ?></a></td>
                                         <td><?php echo $store['brand'] ?></td>
-                                        <td><?php echo $store['lat'] ?></td>
-                                        <td><?php echo $store['lgt'] ?></td>
                                         <td><?php echo $store['world'] ?></td>
                                         <td><?php echo $store['brand_store_status'] ?></td>
                                         <td><?php echo $store['brand_status'] ?></td>

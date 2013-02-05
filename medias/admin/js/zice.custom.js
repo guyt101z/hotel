@@ -72,10 +72,12 @@ $(document).ready(function(){
 	
 	
 	// WYSIWYG Editor
-	$("#editor, #editor2, #editor3,#editor4,#editor5,#editor6,#editor7,#editor8,#editor9").ckeditor({
+	$("#editor, #editor2, #editor3,#editor4").ckeditor({
 		
 	});
-	
+    
+        $('#editor5').cleditor({});
+    
 	// Form validationEngine
 	$('form#validation').validationEngine();		
 	$('form#validation_demo').validationEngine();	

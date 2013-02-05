@@ -1863,9 +1863,6 @@ overflow:hidden;
 	padding: 0px 10px 0 0;
 /*	min-width: 400px;*/
 }
-#formTaxonomy #content, #formBrandStore #content {
-        padding: 0px 7px 0px 7px;
-}
 
 #content .inner {
 	width: 98%;
@@ -3246,7 +3243,9 @@ border-radius:35px;
 	 	#shadowhead {position:fixed;}
 		#content {margin-left:70px;}
                 #formTaxonomy #content, 
-                #formBrandStore #content {margin-left:0px;}
+                #formBrandStore #content,
+                #formTrBrandStore #content {margin-left:0px;}
+                
 }
 @media only screen and (max-width: 480px) {
 	  #content .inner .logo { float: none;width:100%;background-position:  right  bottom; }

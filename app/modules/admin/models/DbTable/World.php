@@ -8,22 +8,14 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
 
         public function getTableName()
         {
-            return $this->_name;
+                return $this->_name;
         }
 
         public function getWorld($data = null)
         {
-            /*
-                $sql = "SELECT DISTINCT trw1.*, world.*, trw2.title as parent FROM translate_world as trw1 ";
-                $sql .= " LEFT JOIN world on trw1.wid = world.wid ";
-                $sql .= " LEFT JOIN translate_world AS trw2 ON world.parent_id = trw2.wid ";
-                $sql .= " ORDER BY trw1.title ASC, trw1.locale ASC";
-             */
                 $sql = "SELECT w1.*, w2.name as parent FROM world AS w1 LEFT JOIN world as w2 on w1.parent_id = w2.wid";
-                if ($data) {
-                    if (is_numeric($data)) {
-                        $sql .= " WHERE w1.wid = " . $data;
-                    }
+                if ($data && is_numeric($data)) {
+                    $sql .= " WHERE w1.wid = " . $data;
                 }
                 return $this->_db->query($sql)->fetchAll();
         }
@@ -34,14 +26,19 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
-        public function getWorldById($id) 
+        public function getWorldLeftJoinTranslateWorld($id)
         {
-                $sql = '';
-                $sql .= ' SELECT w1.*, trw1.title, trw1.locale, trw2.title as parent FROM world as w1 ';
-                $sql .= ' LEFT JOIN translate_world as trw1 ON w1.wid = trw1.wid ';
-                $sql .= ' LEFT JOIN translate_world as trw2 ON w1.parent_id = trw2.wid ';
-                $sql .= ' WHERE w1.wid = ' . $id;
-                return $this->_db->query($sql)->fetch();
+                if ($id && is_numeric($id)) {
+                     $sql = "SELECT w1.*, w2.name as parent_name, trw1.tr_wid, trw1.locale, trw1.title FROM world AS w1 
+                             LEFT Join translate_world AS trw1 ON w1.wid = trw1.wid 
+                             LEFT JOIN world AS w2 on w1.parent_id = w2.wid
+                             WHERE w1.wid = $id";
+                } else {
+                    $sql = "SELECT w1.*, w2.name as parent_name, trw1.tr_wid, trw1.locale, trw1.title FROM world AS w1 
+                             LEFT Join translate_world AS trw1 ON w1.wid = trw1.wid 
+                             LEFT JOIN world AS w2 on w1.parent_id = w2.wid";
+                }
+                return $this->_db->query($sql)->fetchAll();
         }
         
         public function addWorldSingleLocale($data = array()) 
@@ -69,18 +66,6 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                 return null;             
         }
         
-        public function addTranslateWorld($data = array())
-        {
-                if ($this->getTranslateWorld2($data)) {
-                    // alert user that insertion failed.
-                    // implement it later
-                    return null;
-                } else {
-                    $sql2 = "INSERT INTO `translate_world` (`wid`, `locale`, `title`) VALUES ('" . $data['wid'] .  "', '" . $data['locale'] . "', '" . $data['title'] . "')";
-                    return $this->_db->query($sql2);
-                }
-        }
-        
         public function getParents()
         {
                 $sql = "SELECT w1.wid, w1.parent_id, w2.name AS parent 
@@ -88,11 +73,6 @@ class Admin_Model_DbTable_World extends Zend_Db_Table_Abstract
                         LEFT JOIN world AS w2 
                         ON w1.parent_id = w2.wid";
                 return $this->_db->query($sql)->fetchAll();
-        }
-        
-        public function getLocaleByWid($wid)
-        {
-               // $sql = 'SELECT * FROM '
         }
         
         public function getTranslateWorldById($id) 
