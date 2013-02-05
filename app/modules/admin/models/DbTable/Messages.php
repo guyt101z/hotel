@@ -13,7 +13,7 @@ class Admin_Model_DbTable_Messages extends Zend_Db_Table_Abstract
 
     public function getMessages() 
     {        
-        $sql = 'SELECT * FROM ' . $this->_name;
+        $sql = 'SELECT * FROM message';
         return $this->_db->query($sql)->fetchAll();
     }
     

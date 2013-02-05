@@ -1,36 +1,44 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Languages</span></div>
+    <div class="header"><span ><span class="ico gray window"></span>Messages</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li class="active"><a href="#tab2"><?php echo $this->translate('languages') ?></a></li>            
+                <li class="active"><a href="#tab2">Messages</a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
                         <ul class="uibutton-group">
-                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a language">Add</a></li>
+                            <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add">Add</a></li>
                         </ul>
                         <div class="tableName toolbar">
                             <h3><?php echo $this->translate('list') ?></h3>
-                            <table class="display data_table2" id="languages" width="100%">
+                            <table class="display data_table2" id="messages" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Language ID</th>
-                                        <th>Locale</th>
-                                        <th>Title</th>
+                                        <th>Hotel ID</th>
+                                        <th>Room</th>
+                                        <th>Name</th>
+                                        <th>Subject</th>
+                                        <th>Content</th>
+                                        <th>Created Date</th>
+                                        <th>Modified Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($this->languages as $language): ?>
+                                    <?php foreach($this->focusRowArray as $row): ?>
                                     <tr>
-                                        <td><?php echo $language['lid'] ?></td>
-                                        <td><?php echo $language['locale']?></td>
-                                        <td><?php echo $language['title'] ?></td>
+                                        <td><?php echo $row['hid'] ?></td>
+                                        <td><?php echo $row['room']?></td>
+                                        <td><?php echo $row['name'] ?></td>
+                                        <td><?php echo $row['subject'] ?></td>
+                                        <td><?php echo $row['content'] ?></td>
+                                        <td><?php echo $row['cdate'] ?></td>
+                                        <th><?php echo $row['mdate'] ?></th>
                                         <td class="center">
-                                            <span class="tip"><a href="/admin/languages/edit/id/<?php echo $language['lid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
-                                            <span class="tip"><a href="/admin/languages/delete/id/<?php echo $language['lid'] ?>" class="delete" name="<?php echo $this->escape($language['locale']) . ', ' . $this->escape($language['title']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
+                                            <span class="tip"><a href="/admin/messages/edit/id/<?php echo $row['msgid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
+                                            <span class="tip"><a href="/admin/messages/delete/id/<?php echo $row['msgid'] ?>" class="delete" name="<?php echo $this->escape($row['subject']); ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
