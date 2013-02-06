@@ -1,19 +1,18 @@
-<div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>World</span></div>
+<div class="widget">
+    <div class="header"><span ><span class="ico gray window"></span>Brand Stores</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs">
-                <li><a href="<?php echo $this->url(array('controller'=>'world', 'action' => 'index', 'module' => 'admin'), 'default', true) ?>"><?php echo $this->translate('world') ?></a></li> 
+                <li><a href="<?php echo $this->url(array('controller'=>'brand-stores', 'action' => 'index', 'module' => 'admin'), 'default', true) ?>">Brand Stores</a></li> 
                 <li class="active"><a href="#tab2"><?php echo $this->focusRowArray[0]['name'] ?></a></li>
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
                         <form>
-                            
                             <div class="section">
-                                <label>Name</label>   
-                                <div><?php echo $this->focusRowArray[0]['name']; ?><span id ="btnAddALocale" class="uibutton icon add" style="float:right; margin-bottom: 0px; margin-top: -10px;" >Add new translation</span></div>
+                                <label>Name</label> 
+                                <div><?php echo $this->focusRowArray[0]['name']; ?><a href="/admin/brand-stores/add-tr/id/<?php echo $this->focusRowArray[0]['bsid'] ?>" class="uibutton icon add" style="float:right; margin-bottom: 0px; margin-top: -10px;" >Add new translation</a></div>
                             </div>
                             
                                 <?php if ($this->focusRowArray[0]['tr_bsid']) { ?>

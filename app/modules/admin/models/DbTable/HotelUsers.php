@@ -1,19 +1,21 @@
 <?php
 
-class Admin_Model_DbTable_Hotels extends Zend_Db_Table_Abstract
+class Admin_Model_DbTable_HotelUsers extends Zend_Db_Table_Abstract
 {
     
-        protected $_name = 'hotel';
-        protected $_primary = 'hid';
+        protected $_name = 'hotel_user';
+        protected $_primary = 'huid';
 
         public function getTableName()
         {
                 return $this->_name;
         }
 
-        public function getHotels() 
+        public function getHotelUsers() 
         {        
-                $sql = "select hotel.*, world.`name` as world from hotel left join world on hotel.wid = world.wid";
+                $sql = "SELECT hu.*, hotel.name AS hotel_name, user.email FROM hotel_user AS hu
+                        LEFT JOIN hotel on hu.hid = hotel.hid
+                        LEFT JOIN user on hu.uid = user.uid";
                 return $this->_db->query($sql)->fetchAll();
         }
         

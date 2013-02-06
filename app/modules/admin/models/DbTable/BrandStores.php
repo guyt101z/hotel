@@ -27,6 +27,12 @@ class Admin_Model_DbTable_BrandStores extends Zend_Db_Table_Abstract
                 return $this->_db->query($sql)->fetchAll();
         }
         
+        public function getBrandStoreName($id) 
+        {
+                $sql = "SELECT name FROM brand_store WHERE bsid = $id";
+                return $this->_db->query($sql)->fetchColumn();
+        }
+        
         public function getBrandStore($id) 
         {
                 return $this->fetchRow('bsid = ' . $id)->toArray();

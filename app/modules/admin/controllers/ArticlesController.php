@@ -64,13 +64,63 @@ class Admin_ArticlesController extends Zend_Controller_Action
                 $this->render('form');
         }
         
-        public function viewAction()
+        public function addTrAction()
         {
-                $id = $this->getRequest()->getParam('id');
-                $this->view->article = $this->table->getArticle($id);
-                $this->view->translate_article = $this->table->getTranslateArticle($id);
-                // will change to full join later.
-                //$this->view->article = $this->table->getArticlesFullJoinTranslateArticles($id);
+        
+                // get aid
+                $id = $this->_request->getParam('id');
+                $form = new Admin_Form_TranslateArticle(array('method' => 'post'));
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->addTrArticle($data)) {
+                            $this->_redirect('/admin/articles/view/id/' . $data['aid']);
+                        } else {
+                            throw new Zend_Exception('Error occured');
+                        }
+                    }
+                } else {
+                    $this->view->data = array(
+                        'aid'=>$id, 
+                        'article_title'=> $this->table->getArticleTitle($id)
+                    );
+                }
+                
+                $this->view->form = $form;
+        }
+        
+        public function editTrAction()
+        {
+                $form = new Admin_Form_TranslateArticle(array('method' => 'post'));
+          
+                $id = $this->_request->getParam('id');
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->updateTrArticle($id, $data)) {
+                            $this->_redirect('/admin/articles/view/id/' . $data['aid']);
+                        } else {
+                            throw new Zend_Exception('Error occured');
+                        }
+                    }
+                } else {
+                    $data = $this->table->getTranslateArticle($id);
+                    $form->populate($data);
+                    $this->view->data = $data;
+                }
+                $this->view->form = $form;
+        }
+
+        public function viewAction() 
+        {
+            $id = $this->_request->getParam('id');
+
+            if ($id) {
+                $this->view->focusRowArray = $this->table->getArticleLeftJoinTranslateArticle($id);
+                $this->view->id = $id;
+            }
         }
 
         public function deleteAction() 

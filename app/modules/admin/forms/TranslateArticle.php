@@ -1,13 +1,13 @@
 <?php 
 
-class Admin_Form_TranslateHotel extends Zend_Form 
+class Admin_Form_TranslateArticle extends Zend_Form 
 {	
 
         public function init() 
         {
-                $tr_hid = new Zend_Form_Element_Hidden('tr_hid');
+                $tr_aid = new Zend_Form_Element_Hidden('tr_aid');
 
-                $hid = new Zend_Form_Element_Hidden('hid');
+                $aid = new Zend_Form_Element_Hidden('aid');
 
                 $locale = new Zend_Form_Element_Select('locale');
                 $locale_table = new Admin_Model_DbTable_Languages();
@@ -22,17 +22,14 @@ class Admin_Form_TranslateHotel extends Zend_Form
                 $title->setAttribs(array('class' => 'full'));
 
                 $content = new Zend_Form_Element_Textarea('content');
-                $content->setAttribs(array('id' => 'editor'));
-                
-                $address = new Zend_Form_Element_Textarea('address');
-                $address->setAttribs(array( 'id' => 'editor2'));
+                $content->setAttribs(array( 'id' => 'editor'));
 
-                $this->addElements(array($tr_hid, $hid, $locale, $title, $content, $address));
+                $this->addElements(array($tr_aid, $aid, $locale, $title, $content));
 
                 foreach($this->getElements() as $element) {
                     $element->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
                 }
-    }
+        }
 
 }
 

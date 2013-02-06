@@ -3,7 +3,7 @@
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li class="active"><a href="#tab2">Brand Stores</a></li>            
+                <li class="active"><a href="#tab2">Articles</a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
@@ -16,9 +16,8 @@
                             <table class="display data_table2" id="languages" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Article Type</th>
                                         <th>Title</th>
+                                        <th>Type</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
                                         <th>Begin</th>
@@ -32,9 +31,8 @@
                                 <tbody>
                                     <?php foreach($this->articles as $row): ?>
                                     <tr>
-                                        <td><?php echo $row['aid'] ?></td>
-                                        <td><?php echo $row['article_type'] ?></td>
                                         <td><a href="/admin/articles/view/id/<?php echo $row['aid'] ?>"><?php echo $row['title'] ?></a></td>
+                                        <td><?php echo $row['article_type'] ?></td>
                                         <td><?php echo $row['lat'] ?></td>
                                         <td><?php echo $row['lgt'] ?></td>
                                         <td><?php echo $row['stime'] ?></td>

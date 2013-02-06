@@ -1,71 +1,78 @@
 <div class="widget">
-        <div class="header"><span ><span class="ico gray window"></span>Articles</span></div>
-        <div class="content">
-                <div id="UITab">
-                        <ul class="tabs">
-                            <li><a href="/admin/articles">Articles</a></li>   
-                            <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
-                        </ul>
-                    
+    <div class="header"><span ><span class="ico gray window"></span>Articles</span></div>
+    <div class="content">
+        <div id="UITab">
+            <ul class="tabs">
+                <li><a href="/admin/articles">Articles</a></li>   
+                <li class="active"><a href="#"><?php echo $this->focusRowArray[0]['title'] ?></a></li>          
+            </ul>
+            
+            <div class="tab_container">
+                <div id="tab2" class="tab_content"> 
+                    <div class="load_page">
                         <form>
-                                <div class="section">
-                                        <label>Title<small>required.</small></label>   
-                                        <div><?php echo $this->article['title']; ?></div>
-                                </div>
+                            <div class="section">
+                                <label>Name</label> 
+                                <div><?php echo $this->focusRowArray[0]['title']; ?><a href="/admin/articles/add-tr/id/<?php echo $this->focusRowArray[0]['aid'] ?>" class="uibutton icon add" style="float:right; margin-bottom: 0px; margin-top: -10px;" >Add new translation</a></div>
+                            </div>
                             
-                                <?php if ($this->translate_article) { ?>
-                                    <div style="margin: 20px 50px;" >
-                                    <?php foreach($this->translate_article as $tr_article) { ?>
-                                        <h3>Translate title to </h3>
-                                        <div class="section">
-                                                <label>Locale <small>required.</small></label>   
-                                                <div><?php echo $tr_article['locale']; ?></div>
-                                        </div>
-                                        <div class="section">
-                                                <label>Title <small>required.</small></label>   
-                                                <div><?php echo $tr_article['title']; ?></div>
-                                        </div>
-                                        <div class="section">
-                                                <label>Content <small>required.</small></label>   
-                                                <div><?php echo $tr_article['content']; ?></div>
-                                        </div>
-                                    <?php } ?>
+                                <?php if ($this->focusRowArray[0]['tr_aid']) { ?>
+                                <div style="margin: 20px 0px 20px 50px;" >
+                                <?php foreach ($this->focusRowArray as $row) { ?>
+                                    <div class="section">
+                                        <label><small><?php echo $row['locale']; ?></small></label> 
+                                        <div><?php echo $row['tr_title']; ?><span class="tip" style="float:right;"><a href="/admin/articles/edit-tr/id/<?php echo $row['tr_aid'] ?>"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span></div>
+                                        <?php if ($row['content']) { ?> <div style="margin-top: 10px;" class="content_tr_bsid_<?php echo $row['tr_aid'] ?>"><?php echo $row['content']; ?></div> <?php } ?>
                                     </div>
                                 <?php } ?>
-                            
-                                <div class="section">
-                                        <label>Article Type<small>required.</small></label>   
-                                        <div><?php echo $this->article['article_type']; ?></div>
                                 </div>
+                                <?php } ?>
+                            
+                            <div class="section">
+                                    <label>Article Type</label>   
+                                    <div><?php echo $this->focusRowArray[0]['article_type'] ?></div>
+                            </div>
 
-                                <div class="section">
-                                        <label>Latitude <small>required.</small></label>   
-                                        <div><?php echo $this->article['lat']; ?></div>
-                                </div>
+                            <div class="section">
+                                    <label>Latitude</label>   
+                                    <div><?php echo $this->focusRowArray[0]['lat']; ?></div>
+                            </div>
+
+                            <div class="section">
+                                    <label>Longitude</label>   
+                                    <div><?php echo $this->focusRowArray[0]['lgt']; ?></div>
+                            </div>
                             
-                                <div class="section">
-                                        <label>Longitude <small>required.</small></label>   
-                                        <div><?php echo $this->article['lgt']; ?></div>
-                                </div>
+                            <div class="section">
+                                    <label>Begin</label>   
+                                    <div><?php echo $this->focusRowArray[0]['stime']; ?></div>
+                            </div>
                             
-                                <div class="section">
-                                        <label>Begin<small>required.</small></label>   
-                                        <div><?php echo $this->article['stime']; ?></div>
-                                </div>
+                            <div class="section">
+                                    <label>End</label>   
+                                    <div><?php echo $this->focusRowArray[0]['etime']; ?></div>
+                            </div>
                             
+                            <div class="section">
+                                    <label>Created Date</label>   
+                                    <div><?php echo $this->focusRowArray[0]['cdate']; ?></div>
+                            </div>
                             
-                                <div class="section">
-                                        <label>End <small>required.</small></label>   
-                                        <div><?php echo $this->article['etime']; ?></div>
-                                </div>
+                            <div class="section">
+                                    <label>Modified Date</label>   
+                                    <div><?php echo $this->focusRowArray[0]['mdate']; ?></div>
+                            </div>
                             
-                                <div class="section">
-                                        <label>Status <small>required.</small></label>   
-                                        <div><?php echo $this->article['status']; ?></div>
-                                </div>
+                            <div class="section">
+                                    <label>Status <small>required.</small></label>   
+                                    <div><?php echo $this->focusRowArray[0]['status']; ?></div>
+                            </div>
                             
                         </form>
-                    
+                    </div>
                 </div>
+            </div>
         </div>
+        <div class="clear"></div>   
+    </div>
 </div>

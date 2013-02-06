@@ -1,0 +1,23 @@
+<div class="widget">
+    <div class="header"><span ><span class="ico gray window"></span>Articles</span></div>
+    <div class="content">
+         <div id="UITab">
+            <ul class="tabs">
+                <li><a href="<?php $this->url(array('controller'=>'articles', 'action'=>'index', 'module'=>'admin'), 'default', true) ?>">Articles</a></li>   
+                <li><a href="/admin/articles/view/id/<?php echo $this->data['aid'] ?>"><?php echo $this->data['article_title'] ?></a></li>
+                <li class="active"><a href="#">Add</a></li>          
+            </ul>
+            <div id="diagTrBrandStore">
+                <form enctype="multipart/form-data" id="formTrArticle" action="/admin/articles/add-tr" method="<?php echo $this->form->getMethod(); ?>">
+                    <input type="hidden" name="aid" value="<?php echo $this->data['aid'] ?>" id="aid">
+                    <div class="section"><label>Locale</label><div><?php echo $this->form->locale ?></div></div>
+                    <div class="section"><label>Title</label><div><?php echo $this->form->title ?></div></div>
+                    <div class="section"><label>Content</label><div><?php echo $this->form->content ?></div></div>
+                    <div class="section last">
+                            <div><a class="uibutton submit_form" >Submit</a></div>
+                    </div>
+                </form>
+            </div>
+         </div>
+    </div>
+</div>

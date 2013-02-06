@@ -1,0 +1,24 @@
+<div class="widget">
+    <div class="header"><span ><span class="ico gray window"></span>Hotels</span></div>
+    <div class="content">
+         <div id="UITab">
+            <ul class="tabs">
+                <li><a href="/admin/hotels">Hotels</a></li>   
+                <li><a href="/admin/hotels/view/id/<?php echo $this->data['hid'] ?>"><?php echo $this->data['name'] ?></a></li>
+                <li class="active"><a href="#">Edit</a></li>          
+            </ul>
+            <div id="diagTrBrandStore">
+                <form enctype="multipart/form-data" id="formTrHotel" action="/admin/hotels/edit-tr/id/<?php echo $this->data['tr_hid'] ?>" method="<?php echo $this->form->getMethod(); ?>">
+                    <?php echo $this->form->hid ?>
+                    <div class="section"><label>Locale</label><div><?php echo $this->form->locale ?></div></div>
+                    <div class="section"><label>Title</label><div><?php echo $this->form->title ?></div></div>
+                    <div class="section"><label>Address</label><div><?php echo $this->form->address ?></div></div>
+                    <div class="section"><label>Content</label><div><?php echo $this->form->content ?></div></div>
+                    <div class="section last">
+                        <div><a class="uibutton submit_form" >Submit</a></div>
+                    </div>
+                </form>
+            </div>
+         </div>
+    </div>
+</div>

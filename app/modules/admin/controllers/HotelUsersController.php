@@ -1,17 +1,34 @@
 <?php
 
-class Admin_HotelsController extends Zend_Controller_Action 
+class Admin_HotelUsersController extends Zend_Controller_Action 
 {
 	
         public function init() 
         {
-                $this->view->selectedHotels = true;
-                $this->table = new Admin_Model_DbTable_Hotels();
+                $this->view->selectedHotelUsers = true;
+                $this->table = new Admin_Model_DbTable_HotelUsers();
         }
 
         public function indexAction() 
         {
-                $this->view->hotels = $this->table->getHotels();
+                $this->view->focusRowArray = $this->table->getHotelUsers();
+        }
+        
+        public function addAction() 
+        {
+                $form = $this->_getForm();
+
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        $result = $this->table->addHotel($data);
+                        $this->_helper->redirector('index');
+                    } else {
+                        $form->populate($data);
+                    }
+                }
+                
+                $this->render('form');
         }
         
         public function viewAction() 
@@ -29,22 +46,7 @@ class Admin_HotelsController extends Zend_Controller_Action
             }
         }
 
-        public function addAction() 
-        {
-                $form = $this->_getForm();
-
-                if ($this->_request->isPost()) {
-                    $data = $this->_request->getPost();
-                    if ($form->isValid($data)) {
-                        $result = $this->table->addHotel($data);
-                        $this->_helper->redirector('index');
-                    } else {
-                        $form->populate($data);
-                    }
-                }
-                
-                $this->render('form');
-        }
+        
         
         public function addTrAction()
         {
@@ -131,7 +133,7 @@ class Admin_HotelsController extends Zend_Controller_Action
     
         private function _getForm() 
         {
-                $form = new Admin_Form_Hotel(array(
+                $form = new Admin_Form_HotelUser(array(
                     'method' => 'post'
                 ));
 

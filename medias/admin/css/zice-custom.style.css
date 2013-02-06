@@ -4,11 +4,11 @@ form#formTrBrandStore div.section {
 }
 
 form#formTrBrandStore div.section > label {
-    width: 8%;
+    width: 12%;
 }
 
 form#formTrBrandStore div.section > div {
-    margin-left: 12%;
+    margin-left: 17%;
 }
 
 #formTaxonomy #content, #formBrandStore #content, #formTrBrandStore #content {

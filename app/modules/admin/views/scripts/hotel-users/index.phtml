@@ -1,9 +1,9 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray window"></span>Hotels</span></div>
+    <div class="header"><span ><span class="ico gray window"></span>Hotel Users</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
-                <li class="active"><a href="#tab2">Hotels</a></li>            
+                <li class="active"><a href="#tab2">Hotel Users</a></li>            
             </ul>
             <div class="tab_container">
                 <div id="tab2" class="tab_content"> 
@@ -12,22 +12,22 @@
                             <li><a href="<?php echo $this->url(array('action' => 'add')); ?>" class="uibutton icon add" title="Add a brand">Add</a></li>
                         </ul>
                         <div class="tableName toolbar">
-                            <h3><?php echo $this->translate('list') ?></h3>
+                            <h3>List</h3>
                             <table class="display data_table2" id="hotels" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Hotel User ID</th>
                                         <th>Hotel ID</th>
-                                        <th>Name</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
-                                        <th>World</th>
+                                        <th>Hotel Name</th>
+                                        <th>User ID</th>
+                                        <th>User Email</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($this->hotels as $row): ?>
+                                    <?php foreach($this->focusRowArray as $row): ?>
                                     <tr>
-                                        <td><?php echo $row['hid'] ?></td>
+                                        <td><?php echo $row['huid'] ?></td>
                                         <td><a href="/admin/hotels/view/id/<?php echo $row['hid'] ?>"><?php echo $row['name'] ?></a></td>
                                         <td><?php echo $row['lat']?></td>
                                         <td><?php echo $row['lgt'] ?></td>

@@ -31,6 +31,31 @@ class Admin_BrandStoresController extends Zend_Controller_Action
                 $this->render('form');
         }
         
+        public function addTrAction()
+        {
+                
+                $id = $this->_request->getParam('id');
+                $form = new Admin_Form_TranslateBrandStore(array('method' => 'post'));
+                
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        if ($this->table->addTranslateBrandStore($data)) {
+                            $this->_redirect('/admin/brand-stores/view/id/' . $data['bsid']);
+                        } else {
+                            throw new Zend_Exception('Error occured');
+                        }
+                    }
+                } else {
+                    $this->view->data = array(
+                        'bsid'=>$id, 
+                        'brand_store_name'=> $this->table->getBrandStoreName($id)
+                    );
+                }
+                
+                $this->view->form = $form;
+        }
+        
         public function editAction() 
         {
                 $form = $this->_getForm();
