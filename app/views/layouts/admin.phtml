@@ -126,6 +126,7 @@
                               <li><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'translate-brand-stores',), 'default', true); ?>">Translate Brand Stores</a></li>
                           </ul>
                       </li>
+                      <li class="limenu<?php if($this->selectedBrandCampaigns): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'brand-campaigns'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Brand Campaigns</b></a></li>
                       <li class="limenu<?php if($this->selectedArticles): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'articles'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Articles</b></a></li>
                       <li class="limenu<?php if($this->selectedHotels): ?> select<?php endif; ?>"><a href="<?php echo $this->url(array('module' => 'admin' ,'controller' => 'hotels'), 'default', true); ?>"><span class="ico gray shadow window" ></span><b>Hotels</b></a>
                           <ul>

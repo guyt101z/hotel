@@ -13,7 +13,9 @@ class Admin_Model_DbTable_Taxonomies extends Zend_Db_Table_Abstract
 
         public function getTaxonomies() 
         {        
-                $sql = "SELECT t1.*, t2.name as parent FROM taxo as t1 LEFT JOIN taxo as t2 on t1.parent_id = t2.tid";
+                $sql = "SELECT t1.*, t2.name AS parent FROM taxo AS t1 
+                        LEFT JOIN taxo AS t2 ON t1.parent_id = t2.tid
+                        ORDER BY t1.section, t1.pos ASC";
                 return $this->_db->query($sql)->fetchAll();
         }
         

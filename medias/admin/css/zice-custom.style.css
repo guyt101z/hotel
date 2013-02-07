@@ -3,11 +3,13 @@ form#formTrBrandStore div.section {
     border-bottom: none;
 }
 
-form#formTrBrandStore div.section > label {
+form#formTrBrandStore div.section > label, 
+form#formArticle div.section > label {
     width: 12%;
 }
 
-form#formTrBrandStore div.section > div {
+form#formTrBrandStore div.section > div,
+form#formArticle div.section > div {
     margin-left: 17%;
 }
 

@@ -3,30 +3,32 @@
 class Admin_TaxonomiesController extends Zend_Controller_Action 
 {
 
-        public function init() {
-            $this->table = new Admin_Model_DbTable_Taxonomies();    
-            $this->view->selectedTaxonomies = true;
+        public function init() 
+        {
+                $this->table = new Admin_Model_DbTable_Taxonomies();    
+                $this->view->selectedTaxonomies = true;
         }
 
-        public function indexAction() {
-            $this->view->focusRowArray = $this->table->getTaxonomies();
+        public function indexAction() 
+        {
+                $this->view->focusRowArray = $this->table->getTaxonomies();
         }
 
         public function addAction() 
         {
-                    $form = $this->_getForm();
+                $form = $this->_getForm();
 
-                    if ($this->_request->isPost()) {
-                        $data = $this->_request->getPost();
-                        if ($form->isValid($data)) {
-                            $this->table->addTaxonomy($data);
-                            $this->_helper->redirector('index');
-                        } else {
-                            $form->populate($data);
-                        }
+                if ($this->_request->isPost()) {
+                    $data = $this->_request->getPost();
+                    if ($form->isValid($data)) {
+                        $this->table->addTaxonomy($data);
+                        $this->_helper->redirector('index');
+                    } else {
+                        $form->populate($data);
                     }
+                }
 
-                    $this->render('form');
+                $this->render('form');
         }
 
         public function editAction() 

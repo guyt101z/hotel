@@ -1,5 +1,5 @@
 <div class="widget" >
-    <div class="header"><span ><span class="ico gray arrow_bidirectional"></span>Taxonomies</span></div>
+    <div class="header"><span ><span class="ico gray window"></span>Taxonomies</span></div>
     <div class="content">
         <div id="UITab">
             <ul class="tabs" >
@@ -9,7 +9,7 @@
                 <div id="tab2" class="tab_content"> 
                     <div class="load_page">
                         <ul class="uibutton-group">
-                            <li><a href="/admin/taxonomies/add" class="uibutton icon add" title="">Add</a></li>
+                            <li><a href="<?php echo $this->url(array('action'=>'add')) ?>" class="uibutton icon add" title="">Add</a></li>
                         </ul>
                         <div class="tableName toolbar">
                             <h3><?php echo $this->translate('list') ?></h3>
@@ -18,8 +18,8 @@
                                     <tr>
                                         <th>NAME</th>
                                         <th>PARENT</th>
-                                        <th>POSITION</th>
                                         <th>SECTION</th>
+                                        <th>POSITION</th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
@@ -28,8 +28,8 @@
                                     <tr>
                                         <td><?php echo $row['name'] ?></td>
                                         <td><?php echo $row['parent'] ?></td>
-                                        <td><?php echo $row['pos'] ?></td>
                                         <td><?php echo strtoupper($row['section']) ?></td>
+                                        <td><?php echo $row['pos'] ?></td>
                                         <td class="center">
                                             <span class="tip"><a href="/admin/taxonomies/edit/id/<?php echo $row['tid'] ?>" title="Editer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_edit.png" ></a></span> 
                                             <span class="tip"><a href="/admin/taxonomies/delete/id/<?php echo $row['tid'] ?>" class="delete" name="<?php echo $row['name'] ?>" title="Supprimer"><img src="<?php echo $this->baseUrl(); ?>/medias/admin/images/icon/icon_delete.png"></a></span>		

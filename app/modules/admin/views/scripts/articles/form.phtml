@@ -6,13 +6,30 @@
                             <li><a href="/admin/articles">Articles</a></li>   
                             <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
                         </ul>
-                        <form enctype="multipart/form-data" name="formBrandStore" id="formBrandStore" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                        <form enctype="multipart/form-data" name="formArticle" id="formArticle" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
                                 
+                            <div class="section">
+                                <label>Hotel</label>
+                                <div><?php echo $this->form->hid ?></div>
+                            </div>
+                            
+                            <div class="section">
+                                <label>Taxonomy</label>
+                                <div><?php echo $this->form->tid ?></div>
+                            </div>
                                 
+                            <div class="section">
+                                <label>Title<small>required.</small></label>   
+                                <div><?php echo $this->form->title; ?></div>
+                            </div>    
+                            
+                            <div style="margin: 20px 0px 20px 50px;" >
                                 <div class="section">
-                                        <label>Title<small>required.</small></label>   
-                                        <div><?php echo $this->form->title; ?></div>
+                                    <label>Title<small>required.</small></label>   
+                                    <div><?php echo $this->form->title; ?></div>
                                 </div>
+                            </div>    
+                            
                             
                                 <div class="section">
                                         <label>Article Type<small>required.</small></label>   

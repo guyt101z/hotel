@@ -38,7 +38,7 @@ class Admin_Form_Article extends Zend_Form
                     'deleted' => 'Deleted'
                 ));
                 
-                
+
                 
                 $hid = new Zend_Form_Element_Select('hid');
                 $hid->setLabel('Hotel');

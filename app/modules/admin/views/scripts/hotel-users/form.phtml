@@ -1,26 +1,21 @@
 <div class="widget">
-        <div class="header"><span ><span class="ico gray window"></span>Hotels</span></div>
+        <div class="header"><span ><span class="ico gray window"></span>Hotel Users</span></div>
         <div class="content">
                 <div id="UITab">
                         <ul class="tabs">
-                            <li><a href="/admin/hotels">Hotels</a></li>   
+                            <li><a href="/admin/hotel-users">Hotel Users</a></li>   
                             <li class="active"><a href="#"><?php echo $this->action ?></a></li>          
                         </ul>
-                        <form enctype="multipart/form-data" name="formHotels" id="formHotels" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                        <form enctype="multipart/form-data" name="formHotelUsers" id="formHotelUsers" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
                                 
                                 <div class="section">
-                                        <label>Name <small>required.</small></label>   
-                                        <div><?php echo $this->form->name; ?></div>
+                                        <label>Hotel</label>
+                                        <div><?php echo $this->form->hid; ?></div>
                                 </div>
 
                                 <div class="section">
-                                        <label>Latitude <small>optional.</small></label>   
-                                        <div><?php echo $this->form->lat; ?></div>
-                                </div>
-                            
-                                <div class="section">
-                                        <label>Longitude <small>optional.</small></label>   
-                                        <div><?php echo $this->form->lgt; ?></div>
+                                        <label>User</label>   
+                                        <div><?php echo $this->form->uid; ?></div>
                                 </div>
 
                                 <div class="section last">
